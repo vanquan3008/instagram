@@ -1,0 +1,65 @@
+.Menu{
+    width: var(--default-width-more);
+    padding: 8px;
+    border-radius: 12px;
+    background-color: var(--default-white);
+    box-shadow: inset 1px 1px 10px -4px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+.Box-1{
+    width: var(--default-width-more) + 16px ;
+    height: 6px;
+    margin: 8px -8px;
+    background-color: rgba(219, 219, 219, 0.3);
+
+}
+
+.Box-2{
+    width: var(--default-width-more) + 16px ;
+    height: 0.5px;
+    margin: 8px -8px;
+    background-color: rgba(219, 219, 219, 0.3);
+}
+.header_menu{
+    width: var(--default-width-more) - 36px;
+    height: 20px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .icon_btn{
+        width: 24px;
+        height: 16px;
+        align-items:center;
+        float: left;
+        margin: -6px;
+        background-color: var(--default-white);
+        padding-right: 32px;
+
+
+    }
+
+    .icon-class{
+        width: 12px;
+        height: 12px;
+        font-weight: 300;
+        color: var(--default-black);
+        cursor: pointer;
+    }
+    
+    .title{
+        font-size: var(--system-default-fontsize-16);
+        line-height: var(--system-default-lineheight-20);
+        font-weight: 600;
+        color: var(--default-black);
+        width: 180px;
+    }
+    .icon_btn_right{
+        width: 16px;
+        height: 16px;
+        color: var(--default-black);
+    }
+}
+

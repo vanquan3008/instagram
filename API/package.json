@@ -1,0 +1,30 @@
+{
+  "name": "api-ins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" :"nodemon --inspect index.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanquan3008/api_instagram.git"
+  },
+  "keywords": [
+    "API",
+    "instagram_be"
+  ],
+  "author": "vanquan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanquan3008/api_instagram/issues"
+  },
+  "homepage": "https://github.com/vanquan3008/api_instagram#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

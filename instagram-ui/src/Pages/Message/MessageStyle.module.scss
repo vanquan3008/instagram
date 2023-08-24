@@ -1,0 +1,69 @@
+.message{
+    width: var(--default-width-listmessage);
+    border-right: 1px solid var(--default-border);
+    height: 100%;
+    .message-navigation{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .user ,
+        .title{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .user{
+            padding: 36px 24px 12px;
+            .user-name{
+                span{
+                    font-size: var(--system-default-fontsize-20);
+                    line-height: var(--system-default-lineheight-25);
+                    font-weight: 700;
+                }
+
+                .icon-down{
+                    width: 12px;
+                    height: 12px;
+                    padding-top: 4px;
+                    cursor: pointer;
+                    margin-left: 8px;
+                }
+            }
+            .user-newmessage{
+                padding-left: 12px;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                .newmessage-logo{
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        .title{
+            padding: 14px 24px 10px;
+            .title-message{
+                flex-grow: 1;
+                span{
+                    line-height: var(--system-default-lineheight-20);
+                    font-size: var(--system-default-fontsize-16);
+                    font-weight: 700;
+                }
+            }
+            .request{
+                .request-link{
+                    line-height: var(--system-default-lineheight-18);
+                    font-size: var(--system-default-fontsize-14);
+                    font-weight: 600;
+                    color: var(--default-secondary-text);
+                }
+
+            }
+        }
+
+        .list-messagefriend{
+
+        }
+    }
+}

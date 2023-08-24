@@ -1,0 +1,107 @@
+.Wrapper{
+    padding : 10px 24px;
+    height: 56px;
+    width: var(--default-width-search) - 48px;
+    justify-content: center;
+    &:hover{
+        background-color: var( --default-highline-search);
+    }
+}
+.nohover:hover{
+    background-color: transparent;
+}
+.nopadding{
+    padding: 0 !important;
+}
+.account{
+    display: flex;
+    flex-direction: row;
+    z-index: 2;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 52px;
+    justify-content: center;
+}
+
+.Marginright14px{
+    margin-right: 14px;
+}
+.username{ 
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 18px;
+    a{
+       line-height: 18px;
+       font-size: 14px;
+       font-weight: 600;
+       color: var(--default-text-color);
+    }
+    
+    .tick{
+        width: 18px;
+        height: 18px;
+        .tick-icon{
+            width: 12px;
+            height: 12px;
+        }
+
+    }
+}
+
+.name{
+    font-size: var(--system-default-fontsize-14);
+    line-height: var(----system-default-lineheight-18);
+    font-weight: 400;
+    color: var(--default-secondary-text);
+    align-items: center;
+}
+.followingorSwitch{
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    color: rgb( 0, 149, 246)!important;
+}
+.close{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;    
+    padding: 8px;
+    width: 16px;
+    height: 16px;
+    font-weight: 600;
+    &:hover{
+        opacity: 0.6;
+    }
+}
+
+.Suggest{
+    span{
+        font-size: var(--system-default-fontsize-12);
+        line-height: var(--system-default-lineheight-16);
+        font-weight: 400;
+        color: var(--default-secondary-text);
+    }
+}
+.hidden{
+    display: none;
+}
+.image{
+
+    margin: auto 0;
+    .imgnofi{
+        width: 44px;
+        height: 44px;
+    }
+}

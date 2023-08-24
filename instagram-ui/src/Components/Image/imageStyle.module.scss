@@ -1,0 +1,12 @@
+.wrapper{
+    overflow: hidden;
+}
+
+.imgnofi{
+    width: 44px;
+    height: 44px;
+    border: 4px;
+    box-shadow: 1px 1px 0px 0px var(--default-border);
+    image-rendering: pixelated;
+    object-fit: cover;
+}

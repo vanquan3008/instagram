@@ -1,0 +1,42 @@
+.hidden{
+    display: none !important;
+}
+.wrapper{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    user-select: none;
+
+    &:hover{
+        opacity: 0.8;
+    }
+    &.disable{
+        opacity: 0.4;
+        pointer-events: none;
+    }
+}
+// Style text
+.Blue{
+    background-color: var(--default-blue);
+    color: var(--default-white);
+}
+.defaultButton{
+    background-color: var(--default-color-button);    
+    color: var( --default-text-color);
+}
+
+//Size 
+.small{
+    font-size: var(--system-default-fontsize-12);
+    line-height: var( --system-default-lineheight-16);
+}
+.medium{
+    font-size: var(--system-default-fontsize-14);
+    line-height: var( --system-default-lineheight-18);
+}
+

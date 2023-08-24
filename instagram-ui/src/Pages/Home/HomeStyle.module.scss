@@ -1,0 +1,222 @@
+.main{
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.HomePage{
+    padding-top: 22px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
+
+.Home-main{
+    width: var(--default-width-content-pageHome);
+    .Story{
+        height: var(--default-height-story);
+        display: flex;
+        flex-direction: row;
+        padding: 8px 0px;
+        .listStory{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding: 0px;
+            margin: 0;
+            position: relative;
+            overflow:hidden;
+            overflow-x:visible;
+            .Space_Left{
+                width: 2px;
+                height: 100%;
+                position: absolute;
+                left: 0;
+            }
+
+            .Space_Right{
+                width: 2px;
+                height: 100%;
+                right: 0;
+                position: absolute;
+            }
+        }
+        
+    }
+    .Content{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .MarginBottom_24px{
+            margin-bottom: 24px;
+            display: block;
+            width: 100%;
+
+        }
+        .MarginBottom_16px{
+            margin-bottom: 16px;
+            display: block;
+            width: 100%;
+        }
+
+        .Post_Friend{
+            margin: auto;
+            width: var(--default-width-Article);
+            display: flex;
+            flex-direction: column;
+
+            .Betweenarticle{
+
+                width: 100%;
+
+                .WrapperNoti{   
+                    margin-bottom: 24px;
+                    padding-bottom: 16px;
+                    border-bottom: 0.8px solid var(--default-border);
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    justify-items: center;
+                    align-items: center;
+                    padding: 32px 12px;
+
+                    .CheckRead{
+                        width: 72px;
+                        height: 72px;
+                        margin-bottom: 16px;
+                        .Size_72{
+                            width: 72px;
+                            height: 72px;
+                            aspect-ratio: 72/72;
+                        }    
+                    }
+                    .Note1{
+                        height: 15px;
+                        margin-bottom: 12px;
+                        span{
+                            font-size: var(--system-default-fontsize-20);
+                            line-height: var(--system-default-lineheight-25);
+                            font-weight: 400;
+                            color: var(--default-text-color);
+                        }
+                    }
+                    .Note2{
+                        height: 11px;
+                        margin-bottom: 20px;
+                        span{
+                            font-size: var(--system-default-fontsize-14);
+                            line-height: var(--system-default-lineheight-18);
+                            font-weight: 400;
+                            color: var(--default-secondary-text);
+                        }
+                    }
+                    .NotePast{
+                        font-size: var(--system-default-fontsize-14);
+                        line-height: var(--system-default-lineheight-18);
+                        font-weight: 600;
+                        color: var(--default-blue);
+                        height: 18px;
+                    }
+                }
+            }
+            .SuggestPost{
+                margin: 8px 0 16px;
+                span{
+                    padding: 4px;
+                    font-size: var(--system-default-fontsize-20);
+                    line-height: var(--system-default-lineheight-25);
+                    font-weight: 400;
+                    color: var(--default-text-color);
+                }
+            }
+        }
+
+    }
+    
+}
+
+.Infomation{
+    width: 319px;
+    padding-left: 64px;
+    .wrapper{
+        margin-top: 36px;
+        .user{
+            margin: 0px;
+            padding: 0 16px;
+        }
+        .guest{
+            margin: 24px 0 20px;
+            .guest_main{
+                margin: 0px 16px;
+                .header{
+                    display:flex;
+                    flex-direction: row;
+                    
+                    font-weight: 600;
+                    .text{
+                        flex-grow: 1;
+                        span{
+                            line-height: 11px;
+                            line-height: var(--system-default-lineheight-18);
+                            font-size: var(--system-default-fontsize-14);
+                            color: var(--default-secondary-text);
+                        }
+                    }
+                    a{
+                        color: var(--default-text-color);
+                        font-size: var(--system-default-fontsize-12);
+                        line-height: var(--system-default-lineheight-16);
+                        &:hover{
+                            opacity: 0.6;
+                        }
+                    }
+                }
+
+                .containers{
+                    padding-top: 8px;
+                    .FriendSuggest{
+                        padding: 4px 0px;
+                    }
+                }
+
+                
+            }
+        }
+        .footer{
+            padding:0px 16px;
+            width: 100%;
+            .listfooter{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding-bottom: 20px;
+                .item{
+                    position: relative;
+                    margin-right: 12px;
+                    a{
+                        font-weight: 400;
+                        font-size: var(--system-default-fontsize-12);
+                        line-height: var(--system-default-lineheight-16);
+                        color: var(--default-color-text-footer);
+                    }
+                }
+                .item::after{
+                    content: '\00B7';
+                    margin: 3px;
+                    position: absolute;
+                    color: var(--default-color-text-footer);
+                }
+            }
+
+            span{
+                font-weight: 400;
+                font-size: var(--system-default-fontsize-12);
+                line-height: var(--system-default-lineheight-16);
+                color: var(--default-color-text-footer);
+            }
+        }
+    }
+}

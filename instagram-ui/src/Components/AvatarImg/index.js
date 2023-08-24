@@ -1,0 +1,1 @@
+export {default as AvatarImg} from './avatar.js'

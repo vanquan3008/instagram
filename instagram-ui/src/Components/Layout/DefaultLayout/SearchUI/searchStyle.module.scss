@@ -1,0 +1,173 @@
+.wrapper{
+    width: var(--default-width-search);
+    position: fixed;
+    height: calc(var(--default-height-layout) - 16px);
+    background-color: var(--default-white);
+    z-index: 4;
+    top:0px;
+    left:79px;
+    padding: 8px 0px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border: 1px solid  var(--default-border);
+    box-shadow:4px 0 24px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    animation: Scrollleftright ease-in 0.75s;
+}
+
+@keyframes Scrollleftright {
+    from{
+        transform: translateX(-400px);
+    }
+    to{
+        transform: translateX(0px);
+    }
+    
+}
+
+
+.title{
+    margin: 8px 0px;
+    padding: 12px 24px 36px 14px; 
+    width:calc(var(--default-width-search) - 48px);
+    .text{
+        height: 21px;
+        span{
+            line-height: var(--system-default-lineheight-30);
+            font-size: var(--system-default-fontsize-24);
+            font-weight: 600;
+        }
+    }
+}
+.Search{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 16px;
+    .Search-box{
+        margin-bottom: 24px;
+        position: relative;
+
+        .find{
+            padding: 3px 16px;
+            z-index: 0;
+            border-radius: 8px;
+            color: var(--default-black);
+            background-color: var(--default-highline-search);
+            width:calc(var(--default-width-search) - 32px - 32px);
+            height: 34px;
+        }
+
+       .inner{
+            position: absolute;
+            display: flex;
+            width:calc(var(--default-width-search) - 32px - 32px);
+            flex-direction: row;
+            top : 0;
+            left: 0;
+            height: 34px;
+            align-items: center;
+            padding: 3px 16px;
+
+
+            .search-icon{
+                width: 16px;
+                height: 16px;
+                padding-right: 12px;
+                color: var(--default-color-text-and-item-search);
+
+                
+            }
+            .inner-text{
+                color:var(--default-secondary-text);
+                font-size: var(--system-default-fontsize-16);
+                line-height: var(--system-default-lineheight-25);
+
+            }
+        }
+
+        .clear,
+        .load-icon{
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0;
+        }   
+
+        .clear{
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            color: var(--default-color-text-and-item-search);
+        }
+        .load-icon{
+            width: 16px;
+            height: 16px;
+            color: var(--default-color-text-and-item-search);
+        }
+
+        
+    }
+    .box{
+        height: 1px;
+        width: var(--default-color-text-and-item-search);
+        margin:0px -16px ;
+        background-color: var(--default-border);
+    }
+}
+
+.results{
+    flex-grow: 1;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    .results-title{
+        display: flex;
+        justify-content: space-between;
+        margin: 6px 24px 8px;
+        justify-content: space-between;
+        span{
+            line-height: var(--system-default-lineheight-20);
+            font-size: var(--system-default-fontsize-16);
+            font-weight: 600;
+            color: var(--default-text-color);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .clear{
+            background-color: var(--default-white);
+            font-size: var(--system-default-fontsize-14);
+            line-height: var(--system-default-lineheight-18);
+            font-weight: 600;
+            color: var(--default-blue);
+        }
+    }
+
+    .results-list{
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        span{
+            line-height: var(--system-default-lineheight-18);
+            font-size: var(--system-default-fontsize-14);
+            font-weight: 600;
+            color: var(--default-secondary-text);
+        }
+    }
+}
+.results-find{
+    flex-grow: 1;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.hidden{
+    display: none!important;
+}

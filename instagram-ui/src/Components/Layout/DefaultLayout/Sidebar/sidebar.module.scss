@@ -1,0 +1,131 @@
+.wrapper {
+    width: var(--default-width-sidebar, 220px);
+    padding:8px 12px 20px ;
+    height: calc(100vh - 28px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--default-white);
+    transition: width 1s;
+    z-index: 10;
+}
+.ChangeSize55px{
+    width: 55px !important;
+}
+.ChangeSize31px{
+    width: 31px !important;
+}
+.wrapper::before{
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color:rgba(0, 0, 0, .09);
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+.Sidebar__logo {
+    height: 92px;
+    justify-content: center;
+    
+}
+.Sidebar__container{
+    flex-grow: 1;
+}
+.logo-insta {
+    padding: 25px 12px 16px;
+    margin-bottom: 19px;
+    height: 32px;
+
+    color: var(--default-while);
+}
+.container-list {
+    padding: 0;
+    margin: 0;
+    height:  527px;
+    
+}
+.container-list-item{
+    list-style: none;
+    padding: 12px;
+    margin: 2px 0;
+    cursor: pointer;
+}
+.container-list-item-link{
+    display: flex;
+    flex-direction: row;
+}
+.container-list-item-icon,
+.Sidebar__more .icon-class{
+    width: 24px;
+    height: 24px;
+    transition-duration:0.15s;
+    font-weight: 500;
+    color: var(--default-black);
+    line-height: var(--system-default-lineheight-28);
+}
+.container-list-item-text ,
+.Sidebar__more .text{
+    margin:  auto 0;
+    padding-left: 16px;
+    font-size: var(--system-default-fontsize-16);
+    overflow: hidden;
+    line-height: var(--system-default-lineheight-28);
+    font-weight:500;
+    color: var(--default-black);   
+}
+
+.container-list-item-text__onClick{
+    font-weight:bolder;
+}
+.container-list-item:hover,
+.Sidebar__more:hover{
+    background-color: rgba(0, 0, 0, .05);
+    border-radius: 12px;
+}
+.container-list-item:hover .container-list-item-icon,
+.Sidebar__more:hover .icon-class ,
+.container-list-item:hover .AvatarProfile
+{
+    width: 30px;
+    height: 30px;
+    color: rgb(164, 20, 231);
+}
+
+.Sidebar__more{
+    display: flex;
+    flex-direction: row;
+    padding:  12px;
+    height: 32px;
+    width: 196px;
+    margin: 4px 0;
+}
+.Sidebar__more .icon{
+    margin: auto 0;
+}
+.avatar{
+    width: 31px;
+    height: 28px;
+}
+.AvatarProfile{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition-duration:0.15s;
+    object-fit: cover;
+}
+
+.hidden{
+    display: none;
+}
+
+.onClickitem{
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, .05);
+    .container-list-item-icon{
+        color: rgb(164, 20, 231);
+        width: 30px;
+        height: 30px;
+    }
+}

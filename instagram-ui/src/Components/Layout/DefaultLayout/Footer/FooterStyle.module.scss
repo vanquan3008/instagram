@@ -1,0 +1,31 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    margin: 160px 0 80px;
+    font-size: var(--system-default-fontsize-14);
+    line-height: var(--system-default-lineheight-16);
+    font-weight: 400;
+    color: var(--default-secondary-text);
+    .footer1{
+        .listfooter{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            .item{
+                margin: 0 10px;
+            }
+        }
+    }
+
+    .footer2{
+        margin: 36px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .Language{
+            margin: 0 16px;
+        }
+
+    }
+}

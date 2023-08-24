@@ -1,0 +1,1 @@
+export {default as SlidesArticle} from './Slides.js'

@@ -1,0 +1,80 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+//default
+:root {
+    --default-height-layout: 100vh;
+    --default-width-sidebar: 220px;
+    --default-width-more :264px;
+    --default-width-search:400px;
+    --default-width-notification:400px;
+    --default-height-account : 44px;
+    --default-width-account : 44px;
+    --default-width-content-pageHome:578px;
+    --default-width-Article :470px;
+    --default-width-Article-Post:468px;
+    --default-height-Article-Post:585px;
+    --default-width-listmessage : 398px;
+
+    --system-default-fontsize-12 : 12px;
+    --system-default-fontsize-14 : 14px;
+    --system-default-fontsize-16 : 16px;
+    --system-default-fontsize-18 : 18px;
+    --system-default-fontsize-20 : 20px;
+    --system-default-fontsize-24 : 24px;
+
+    
+    --system-default-lineheight-16 :16px; 
+    --system-default-lineheight-18 :18px;    
+    --system-default-lineheight-20 :20px;  
+    --system-default-lineheight-25 :25px;
+    --system-default-lineheight-28 :28px;
+    --system-default-lineheight-30 :30px;
+
+    --default-black:#000;
+    --default-blue :rgb(0, 149, 246);
+    --default-white : #fff;
+    --default-text-color : #000;
+    --default-secondary-text:rgb(115, 115, 115);
+    --default-color-text-and-item-search : rgb(142, 142, 142);
+    --default-border : rgb(219,219,219);
+    --default-color-text-footer:#c7c7c7;
+    --default-border-2:rgb(115, 115, 115);
+    --default-highline-search : rgb(239,239,239);
+    --default-color-button : rgb(239,239,239);
+    
+
+    --font-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Lora', serif;
+    line-height: 18px;
+    text-rendering: optimizeSpeed;
+    padding: 0;
+    margin: 0;
+}
+
+button , input ,[tabindex] {
+    outline: none;
+    border: none;
+}
+a[href]{
+    color :var(--default-text-color);
+    text-decoration: none;
+}
+li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}

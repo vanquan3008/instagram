@@ -1,0 +1,1 @@
+export {default as Imgs} from '~/Components/Image/image.js'
