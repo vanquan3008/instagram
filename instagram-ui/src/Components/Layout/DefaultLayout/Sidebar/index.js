@@ -21,14 +21,7 @@ function Sidebar({type}) {
     const [ClickSearch , setClickSearch] = useState(false);
     const [ClickNoti ,setClickNoti] = useState(false);
 
-    if(type === 'Message'&& ClickNoti === false && ClickSearch===false)
-    {
-        clickMessage = true;
-    }
-    else
-    { 
-        clickMessage = false;
-    }
+    (type === 'Message'&& ClickNoti === false && ClickSearch===false) ? clickMessage = true:clickMessage = false;
     return (
             <div className={cx('mainsidebar')}>
                 <div className={
@@ -101,7 +94,7 @@ function Sidebar({type}) {
                             })}
                             {/* Avatar */}
                             <li className={cx('container-list-item')}>
-                                <a className={cx('container-list-item-link')} href='/'>
+                                <a className={cx('container-list-item-link')} href='/profile'>
                                     <div className={cx('avatar')}>
                                         <Imgs src={require('~/Assets/img/avatar01.jpg')} alt={"AvatarProfile"} className={cx('AvatarProfile')} />
                                     </div>

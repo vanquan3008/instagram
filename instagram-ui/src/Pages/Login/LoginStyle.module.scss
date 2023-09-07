@@ -1,0 +1,88 @@
+.login{
+    width: 100%;
+    height: 100vh;
+
+    .login__wrapper{
+        width: 100%;
+        height: 100%;
+        
+        .login__main{
+            display: flex;
+            flex-direction :row ; 
+            justify-content: center;
+            height: 100%;
+
+            .login__left{
+                width: 350px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: 0 32px 12px 0;
+                .logoInstagram{
+                    width: 350px;
+                    height: 350px;
+                    
+                }
+            }
+
+            .login__right{
+                width :350px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                
+                .login__singup{
+                    display: flex;
+                    flex-direction: row;
+                    border: 1px solid rgba(0, 0, 0, .05);
+                    box-shadow: 1px 1px 1px rgba(0, 0, 0, .05);
+                    border-radius: 2px;
+                    padding: 10px 0;
+                    justify-content: center;  
+                    font-size: var(--system-default-fontsize-16);
+                    line-height: var(--system-default-lineheight-20);
+                    color:var(--default-secondary-text);
+                    .login__singup--text{
+                        padding: 15px;
+                        font-weight: 400;
+                        .login__singup--link{
+                            color: var(--default-blue);
+                            margin-left:2px ; 
+                            &:hover{
+                                opacity: 0.6;
+                            }
+                        }
+                    }
+                       
+                }
+                .login__footer{
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    .footer__title{
+                        margin: 10px 20px;
+                        font-size: var(--system-default-fontsize-14);
+                        line-height: var(--system-default-lineheight-18);
+                        color: var(--default-secondary-text);
+                        
+                    }
+                    .logo_brand{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            .logo{
+                                margin: 8px;
+                                .iconbrand{
+                                    width: 135px;
+                                    height: 40px;
+                                }
+                            }
+                        }
+                }
+            }
+        }   
+        .footer__main{
+            margin-top: -150px;
+        }
+    }
+}

@@ -5,6 +5,7 @@ const image = {
     logochange: require('~/Assets/img/logoinsta.svg').default,
     checkiconInsta : require('~/Assets/img/CheckInsta.png'),
     logoNewMess : require('~/Assets/img/LogoNewMess.svg').default,
+    logoInstagram : require('~/Assets/img/ins-Logo.jpg')
 };
 
-export default image
+export default image;

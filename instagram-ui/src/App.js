@@ -2,11 +2,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 import { publicRoutes } from '~/Routes';
 import { DefaultLayout } from '~/Components/Layout';
+import Login from '~/Pages/Login';
+import Register from './Pages/Register';
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
+                
                 <Routes>
+                    <Route path = '/login' element = {<Login/>}/>
+                    <Route path = '/register' element = {<Register/>}/>
                     {
                     publicRoutes.map((router, index) => {
                         let Layout = DefaultLayout;
