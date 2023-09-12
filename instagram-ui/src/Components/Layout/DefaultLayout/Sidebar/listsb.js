@@ -75,7 +75,11 @@ const listmore = [
     {block :'true' , type  : 'Box-1'},
     {iconitem : 'false' , nameitem : 'Switch Account'},
     {block :'true' , type  : 'Box-2'},
-    {iconitem : 'false' , nameitem : 'Log out'},
+    {
+        iconitem : 'false' , 
+        nameitem : 'Log out',
+        link :'/login'
+    },
 ]
 
 export  {listitem , listmore};

@@ -19,17 +19,19 @@ function Menu({children}) {
             const isParent = !!item.children;
 
             if (item.block==='true'){
-                return(<div key={index} className={cx(item.type)}></div>)
+                return(
+                    <div key={index} className={cx(item.type)}></div>
+                )
             }
             if(item.iconitem === 'false'){
                 return (
                     <Stingitem 
                         key={index} 
                         hidden={'true'} 
+                        linkitem={item.link}
                         text ={item.nameitem}
                         inputs={item.change}
                         onclick={() =>{
-                            console.log(item.change)
                             if(isParent){
                                 setHistory(prev => [...prev ,item.children])
                             }
@@ -40,7 +42,7 @@ function Menu({children}) {
             else{
                 return (
                     <Stingitem key={index} 
-                    icon={item.iconitem} 
+                        icon={item.iconitem} 
                     text ={item.nameitem}
                     onclick={() =>{
                         if(isParent){

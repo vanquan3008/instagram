@@ -1,15 +1,39 @@
 import classNames from "classnames/bind";
 import style from "./LoginStyle.module.scss";
-import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer";
+
+
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import  image from "~/Assets/img/index.js";
 import {Imgs} from "~/Components/Image/index.js";
-// import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Form } from "~/Components/Layout/DefaultLayout/Form/index.js";
+import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer";
+import {loginUser} from "../../CallAPI/callApi.js";
 
 const cx = classNames.bind(style);
 
+
 function Login() {
+    //Create a vaiable
+    const [username , setusername] =useState("");
+    const [password , setpassword] =useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    //Function handler 
+    function handlesubmit(e){
+        e.preventDefault();
+        const usercurrent = {
+            username:username,
+            password:password,
+        }
+        loginUser(usercurrent,dispatch,navigate);
+    }
+
+
     return (
     <div className={cx('login')}>
         <div className={cx('login__wrapper')}>
@@ -19,7 +43,53 @@ function Login() {
                 </div>
                 <div className={cx('login__right')}>
                     {/* Form sign in */}
-                    <Form></Form>
+                    <form  className={cx('main')}
+                            onSubmit={handlesubmit}>
+                        <Imgs src={image.logo} className={cx('login__logo')}></Imgs>
+                        <div className={cx('login__form')}>
+                            <input 
+                                required
+                                type="username" 
+                                className={cx('input__user')}
+                                placeholder="Phone number,username or email" 
+                                onChange={(e)=>{
+                                    setusername(e.target.value)
+                                }}
+                            ></input>
+                            <input 
+                                type="password"
+                                required
+                                minLength={6}
+                                className={cx('input__password')}
+                                placeholder="Password" 
+                                onChange = {
+                                    (e)=>{
+                                        setpassword(e.target.value)
+                                    }
+                                }
+                            ></input>
+                            <button className={cx('login__btn')}>
+                                Login
+                            </button>
+                        </div>
+                        <div className={cx('login__line')}>
+                            <div className={cx('line_1')}></div>
+                            <div className={cx('text__line')}>OR</div>
+                            <div className={cx('line_2')}></div>
+                        </div>
+                        <div className={cx('login__facebook')}>
+                            <a href="/" className={cx('login__facebook--link')}>
+                                <FontAwesomeIcon icon={faFacebook} style={{color: "#3f84de", marginRight : "8px"}} />
+                                <span className={cx('login__facebook--text')}>Login with facebook</span>
+                            </a>
+                        </div>
+                        <div className={cx('login__forget')}>
+                            <a 
+                                href="/" 
+                                className={cx('login__forgot--link')}
+                            >Forgot password?</a>
+                        </div>
+                    </form>
                     {/* Link register */}
                     <div className={cx('login__singup')}>
                        <div className={cx('login__singup--text')}>
