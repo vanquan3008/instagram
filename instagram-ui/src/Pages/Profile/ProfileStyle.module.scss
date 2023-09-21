@@ -1,0 +1,187 @@
+.register{        
+    margin: 0 30.5px;
+    padding: 30px 20px 0px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    .main{
+        display: flex;
+        justify-content: center;
+        .header{ 
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 44px;
+            width: 935px;
+            position: relative;
+            &::after{
+                content: "";
+                position: absolute;
+                background-color: var(--default-border);
+                width: 100%;
+                height: 1px;
+                bottom: -44px;
+                left: 0;
+            }
+
+            .avatar{
+                flex-grow: 1;
+                margin-right: 30px;
+                .avatar__upload--btn{
+                    margin: 8px 0px;
+                    width: 100%;
+                    background-color: var(--default-white);
+                    .avatar__img{
+                        margin: auto;
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        border: 0.8px solid var(--default-border);
+                        box-shadow: 0.8px 0.8px 0.8px var(--default-border)  ;
+                    }
+                }
+
+            }
+
+            .info__user{
+                flex-grow: 2;
+                display: flex;
+                flex-direction: column;
+                width: 164px;
+                
+                .info__general{
+                    display: flex;
+                    flex-direction: row;
+                    
+                    .info__name{
+                        .info__name--link{
+                            font-size: var(--system-default-fontsize-20);
+                            line-height: var(--system-default-lineheight-40);
+                            font-weight: 400; 
+                        }
+                        color :var(--default-text-color);
+                    }
+                    
+                    
+                    .edit__profile{
+                        padding: 4px 16px;
+                        height: 32px;
+                        margin-left: 20px;
+                        border-radius: 8px;
+                        background-color: var(--default-color-button);
+                        .edit__profile--link{
+                            font-size: var(--system-default-fontsize-14);
+                            line-height: var(--system-default-lineheight-32);
+                            font-weight: 600;
+                            height: 32px;
+                            padding: auto;
+                            
+                        }
+                    }
+                    .settings{
+                        width: 40px;
+                        height: 40px;
+                        margin-left: 5px;
+                        .settings-icon{
+                            width: 24px;
+                            height: 24px;
+                            padding: 8px;
+                        } 
+                    }
+                }
+                .space_20{
+                    margin-bottom: 20px;
+                }
+                .info__social{
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 20px;
+                    .user__post,
+                    .user__follower,
+                    .user__following{
+                        font-size: var(--system-default-fontsize-16);
+                        line-height: var(--system-default-lineheight-18);
+                        font-weight: 400;
+                        margin-right: 40px;
+                        span{
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .info__detail{
+                    display: flex;
+                    flex-direction: column;
+                    .fullname{
+                        font-size: var(--system-default-fontsize-14);
+                        line-height: var(--system-default-lineheight-18);
+                        font-weight: 600;
+                        margin-bottom: 20px;
+                    }
+                    .description{
+                        font-size: var(--system-default-fontsize-14);
+                        line-height: var(--system-default-lineheight-18);
+                        width: 100%;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }  
+    }
+    .container{
+
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-grow: 1;
+        .item{
+            display: flex;
+            flex-direction: row;
+            margin-right: 60px;
+            height: 52px;
+            position: relative;
+            cursor: pointer;
+
+            span{
+                line-height: 52px;
+                font-size: var(--system-default-fontsize-12);
+                font-weight: 400;
+                letter-spacing: 1px;
+                margin-left: 6px
+            };
+
+            .allpost__icon,
+            .saves__icon,
+            .tagged__icon{
+                height: 52px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            &::after{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: black;
+                content: "";
+            }
+            &:hover{
+                font-weight: 600;
+                color: var(--default-blue);
+            }
+            .article{
+                flex-grow: 1;
+            }
+            
+        } 
+    }
+    .footer__main{
+        margin: -60px 0 -40px;}
+}
+
+   

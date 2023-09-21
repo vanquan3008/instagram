@@ -8,11 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
 
 import  image from "~/Assets/img/index.js";
 import {Imgs} from "~/Components/Image/index.js";
 import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer";
 import {loginUser} from "../../CallAPI/callApi.js";
+import { useSelector } from "react-redux";
+
 
 const cx = classNames.bind(style);
 
@@ -21,16 +24,27 @@ function Login() {
     //Create a vaiable
     const [username , setusername] =useState("");
     const [password , setpassword] =useState("");
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const errorlogin = useSelector((state) => state.auth.login.error);
+    // const usercurrent = useSelector((state) => state.auth.login.currrentUser);
+
+    // useEffect(()=>{
+    //     if(usercurrent){
+    //         localStorage.setItem("user", JSON.stringify(usercurrent))
+    //     }
+    // },[usercurrent])
+
+
+
     //Function handler 
-    function handlesubmit(e){
-        e.preventDefault();
-        const usercurrent = {
+    const handlesubmit = (e)=>{
+        const user = {
             username:username,
             password:password,
         }
-        loginUser(usercurrent,dispatch,navigate);
+        loginUser(user,dispatch,navigate);
     }
 
 
@@ -41,7 +55,7 @@ function Login() {
                 <div className={cx('login__left')}>
                     <Imgs className = {cx('logoInstagram')} src = {image.logoInstagram}></Imgs>
                 </div>
-                <div className={cx('login__right')}>
+                <div className={cx('login__right')}>  
                     {/* Form sign in */}
                     <form  className={cx('main')}
                             onSubmit={handlesubmit}>
@@ -49,9 +63,9 @@ function Login() {
                         <div className={cx('login__form')}>
                             <input 
                                 required
-                                type="username" 
+                                type="text" 
                                 className={cx('input__user')}
-                                placeholder="Phone number,username or email" 
+                                placeholder="Phone number,username" 
                                 onChange={(e)=>{
                                     setusername(e.target.value)
                                 }}
@@ -68,6 +82,9 @@ function Login() {
                                     }
                                 }
                             ></input>
+                            <span className={cx('text-checkpassword',errorlogin ? '':'hidden')} >
+                                Sorry, your password was incorrect. Please double-check your password.
+                            </span>
                             <button className={cx('login__btn')}>
                                 Login
                             </button>

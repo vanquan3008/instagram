@@ -3,33 +3,78 @@ import {createSlice} from "@reduxjs/toolkit"
 const authSlice = createSlice({
     name: "auth",
     initialState: {
+        // Login 
         login: {
             currrentUser : null,
             isFetching : false,
             error : null,
-        }
+        },
+        //Register
+
+        register : {
+            isFetching : false,
+            error : null,
+            success : null,
+        },
     },
     reducers :{
+        //Login 
         loginStart : (state)=>{
-            state.isFetching = true ;
+            state.login.isFetching = true ;
+            state.login.error = false;
         },
         loginSucessfully : (state , action)=>{
-            state.isFetching = false;
-            state.currrentUser = action.payload;
-            state.error = false;
+            state.login.isFetching = false;
+            state.login.currrentUser = action.payload;
+            state.login.error = false;
         },
         
         loginError : (state)=>{
-            state.isFetching = false;
-            state.error = true;
-        }
+            state.login.isFetching = false;
+            state.login.error = true;
+        },
+        //Register
+        registerStart : (state)=> {
+            state.register.isFetching = true ;
+        },
+        registerSuccess :(state) => {
+            state.register.isFetching =  false;
+            state.register.success =  true;
+            state.register.error =  false;
+        },
+        registerError :  (state) =>{
+            state.register.error = true;
+            state.register.success = false;
+            state.register.isFetching = false;
+        },
+        //Logout 
+        logOutStart : (state)=>{
+            state.login.isFetching = true ;
+        },
+        logOutSucessfully : (state)=>{
+            state.login.isFetching = false;
+            state.login.currrentUser = null;
+            state.login.error = false;
+        },
+        logOutError : (state)=>{
+            state.login.isFetching = false;
+            state.login.error = true;
+        },
+
     }
 })
 
 export const {
     loginStart,
     loginSucessfully,
-    loginError
+    loginError,
+    registerStart,
+    registerSuccess,
+    registerError,
+    logOutStart,
+    logOutSucessfully,
+    logOutError
 } = authSlice.actions;
 
 export default authSlice.reducer;
+export {authSlice};

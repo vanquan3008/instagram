@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken")
+
 const middleware = {
     //Verify whether the user is himself or not (When login is successful)
     verifyToken : async (req, res, next) =>{
         const Token = req.headers.token;
         if(Token){
-            const accesstoken = Token.split("")[1];
-            console.log(accesstoken);
+            const accesstoken = Token.split(" ")[1];
             jwt.verify(accesstoken , process.env.JWT_ACCESS_KEY , 
                 (err, user) =>{
                     if(err){
@@ -15,7 +15,8 @@ const middleware = {
                     }
                 req.user = user;
                 next();
-            })
+                }
+            )
         }
         else{
             return res.status(401).json({
@@ -28,7 +29,7 @@ const middleware = {
     generateAccessToken : (user) =>{
         return jwt.sign({
                 id : user.id,
-                isAdmin : user.isAdmin
+                isAdmin : user.isAdmin,
             }, 
             process.env.JWT_ACCESS_KEY,
             {expiresIn : "30d"})
@@ -38,10 +39,12 @@ const middleware = {
     generateRefreshToken : (user) =>{
         return jwt.sign({
                 id : user.id,
-                isAdmin : user.isAdmin
+                isAdmin : user.isAdmin,
             }, 
             process.env.JWT_REFRESH_KEY,
-            {expiresIn : "365d"})
+            
+            {expiresIn : "365d"}
+        )
     }
 }
 

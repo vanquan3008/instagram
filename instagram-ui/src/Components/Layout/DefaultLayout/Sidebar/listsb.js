@@ -33,8 +33,8 @@ const listitem = [
     },
     {
         iconitem : faFacebookMessenger ,
-        nameitem : 'Message',
-        link : '/message'
+        nameitem : 'Messages',
+        link : '/messages'
     },
     {
         iconitem : faHeart ,
@@ -78,7 +78,7 @@ const listmore = [
     {
         iconitem : 'false' , 
         nameitem : 'Log out',
-        link :'/login'
+        link :'/'
     },
 ]
 

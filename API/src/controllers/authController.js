@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User.js')
+const middleware = require('../middleware/middleware.js')
+let refreshTokens = [];
 
 const authController = {
     //[Post]/Register
@@ -25,17 +27,22 @@ const authController = {
         try {
             const user = await User.findOne({ username: req.body.username })
             if (user) {
-                const validPassword = await bcrypt.compare(req.body.password, user.password);
+                const validPassword = await bcrypt.compare(
+                    req.body.password, 
+                    user.password
+                );
                 if (validPassword) {
                     //Login success and create jwt token
-                    const token = jwt.sign(
-                        { 
-                            _id: user._id , 
-                            isAdmin: user.isAdmin
-                        }, 
-                        process.env.JWT_ACCESS_KEY, 
-                        { expiresIn: 3600 }
-                    )
+                    const token = middleware.generateAccessToken(user);
+                    const newrefreshtoken = middleware.generateRefreshToken(user);
+                    refreshTokens.push(newrefreshtoken);
+                    //Save new refresh token to cookie
+                    res.cookie("refreshToken", newrefreshtoken, {
+                        httpOnly: true,
+                        secure : false,
+                        path: "/",
+                        sameSite: "strict",
+                    });
                     const {password , ...other} = user._doc; 
                     res.status(200).json({ token ,...other})
                 } else {
@@ -49,7 +56,53 @@ const authController = {
         catch (error) {
             res.status(400).json(error)
         }
+    },
+
+    //[POST]/LogOut
+    logoutUser : async (req,res) => {
+        //Clear cookies when user logs out
+        refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
+        res.clearCookie("refreshToken");
+        res.status(200).json("Logged out successfully!");
+    },
+    //[POST] /Refresh Token 
+    refreshToken: async(req,res)=>{
+        const rftoken =  req.cookies.refreshToken;
+        console.log(rftoken);
+        if (!rftoken) {
+            return res.status(401).json("You are not authenticated");
+        }
+       
+        if (!refreshTokens.includes(rftoken)) {
+            return res.status(403).json("Refresh token is not valid");
+        }
+       
+        //Verify refresh
+        jwt.verify(rftoken , process.env.JWT_REFRESH_KEY , 
+            (err,user)=>{
+                if(err) {
+                    return res.status(404).json({message:"Error refreshing token"});
+                }
+                else {
+                    //Create new access token and refresh token
+                    const newtoken = middleware.generateAccessToken(user);
+                    const newrefreshtoken = middleware.generateRefreshToken(user);
+                    refreshTokens.push(newrefreshtoken);  
+                    refreshTokens = refreshTokens.filter((token) => token !== rftoken);
+                    //Save new refresh token
+                    res.cookie("refreshToken", newrefreshtoken, {
+                        httpOnly: true,
+                        secure : false,
+                        path: "/",
+                        sameSite: "strict",
+                    });
+                    res.status(200).json({newtoken , refreshTokens})
+                }
+            }
+        )
+        res.status(200)
     }
+
 
 }
 

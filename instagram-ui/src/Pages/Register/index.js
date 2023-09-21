@@ -3,26 +3,69 @@ import style from "./RegisterStyle.module.scss";
 import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer";
 import  image from "~/Assets/img/index.js";
 import {Imgs} from "~/Components/Image/index.js";
+import { registerUser } from "~/CallAPI/callApi";
+
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
 
 
 const cx = classNames.bind(style);
 function Register() {
+    const username = useRef()
+    const email = useRef()
+    const password =useRef();
+    const repassword = useRef();
+    const [success , getsucess] = useState(false);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+
+    const  handleRegister = async (e) => {
+        e.preventDefault();
+        if (password.current.value !== repassword.current.value) {
+            password.current.setCustomValidity("Password don't match!")
+        } 
+        else {
+            const user = {
+                username: username.current.value,
+                email: email.current.value,
+                password: password.current.value,
+            }
+            getsucess(true);
+            registerUser(user , dispatch , navigate)
+        }
+    }
     return ( 
         <div className={cx('register')}>
             <div className={cx('main_register')}>
-                <form className={cx('main')}>
+                <form className={cx('main')} 
+                      onSubmit={handleRegister}        
+                >
                     <Imgs src={image.logo} className={cx('login__logo')}></Imgs>
                     <div className={cx('login__form')}>
                         <input 
                             required
-                            type="text" 
+                            type="username" 
                             className={cx('input__user')}
-                            placeholder="Phone number,username or email" 
+                            placeholder="Phone number or username" 
+                            ref={username}
+                        ></input>
+                        <input 
+                            type="email"
+                            required
+                            minLength={6}
+                            className={cx('input__email')}
+                            placeholder="Email" 
+                            ref={email}
                         ></input>
                         <input 
                             type="password"
+                            ref={password}
                             required
                             minLength={6}
                             className={cx('input__password')}
@@ -30,12 +73,15 @@ function Register() {
                         ></input>
                         <input
                             type="password"
+                            ref={repassword}
                             required
                             minLength={6}
                             className={cx('input__reloadpassword')}
                             placeholder="Password" 
                         ></input>
-                        <button className={cx('login__btn')}>
+                        <button className={cx('login__btn')} 
+                                disabled={success} 
+                        >
                             Register
                         </button>
                     </div>

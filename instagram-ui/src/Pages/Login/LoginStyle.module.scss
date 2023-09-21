@@ -61,7 +61,12 @@
                             font-size: var(--system-default-fontsize-16);
                             color: var(--default-secondary-text);
                         }
-                
+                        .text-checkpassword{
+                            padding: 8px 12px;
+                            font-size: var(--system-default-fontsize-14);
+                            line-height: var(--system-default-lineheight-18);
+                            color: red;
+                        }
                         .login__btn{
                             margin: 8px 40px;
                             height: 36px;
@@ -190,4 +195,9 @@
             margin-top: -150px;
         }
     }
+}
+
+
+.hidden{
+    display: none;
 }

@@ -113,11 +113,12 @@ function Sidebar({type}) {
                     <Menu>
                         <div className={
                             cx('Sidebar__more',
-                                ClickSearch === true || ClickNoti === true || clickMessage === true ?'ChangeSize31px':'')
+                                ClickSearch === true || ClickNoti === true || clickMessage === true ? 'ChangeSize31px':'')
                             }
                         >
                             <div className={cx('icon')}>
-                                <FontAwesomeIcon icon={faBarsStaggered} className={cx('icon-class')} />
+                                <FontAwesomeIcon icon={faBarsStaggered} 
+                                className={cx('icon-class')} />
                             </div>
                             <h2 className={cx('text', 
                                         ClickSearch === true || ClickNoti === true || clickMessage === true  ? 'hidden' :'' )}>

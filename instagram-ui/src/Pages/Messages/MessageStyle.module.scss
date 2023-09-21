@@ -1,8 +1,8 @@
-.message{
-    width: var(--default-width-listmessage);
+.messages{
+    width: var(--default-width-listmessages);
     border-right: 1px solid var(--default-border);
     height: 100%;
-    .message-navigation{
+    .messages-navigation{
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -29,12 +29,12 @@
                     margin-left: 8px;
                 }
             }
-            .user-newmessage{
+            .user-newmessages{
                 padding-left: 12px;
                 width: 40px;
                 height: 40px;
                 cursor: pointer;
-                .newmessage-logo{
+                .newmessages-logo{
                     width: 24px;
                     height: 24px;
                 }
@@ -43,7 +43,7 @@
 
         .title{
             padding: 14px 24px 10px;
-            .title-message{
+            .title-messages{
                 flex-grow: 1;
                 span{
                     line-height: var(--system-default-lineheight-20);
@@ -62,7 +62,7 @@
             }
         }
 
-        .list-messagefriend{
+        .list-messagesfriend{
 
         }
     }

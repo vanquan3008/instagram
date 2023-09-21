@@ -6,23 +6,43 @@ import styles from './MenuStyle.module.scss'
 import classNames from 'classnames/bind.js';
 import { listmore } from '../Sidebar/listsb.js';
 import MenuHeader from './Header.js';
-import { useState } from 'react';
+import { createAxios } from '~/createInstance.js';
 
+import { useNavigate } from 'react-router-dom';
+import { logOut } from '~/CallAPI/callApi.js';
+import { useSelector } from 'react-redux';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logOutSucessfully } from '~/Redux/authSlice.js';
 const cx = classNames.bind(styles);
 
 function Menu({children}) {
     const [history , setHistory] = useState([{data : listmore}]);
-    const currentmenu  = history[history.length - 1]
+    const currentmenu  = history[history.length - 1];
+    const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.login.currrentUser);
+    const id = user?._id;
+    const token = user?.token;
+
+    const axiosJWT = createAxios(user , dispatch ,logOutSucessfully)
+
+    
+    const handleLogout = () =>{
+        logOut(dispatch, id , navigate , token ,axiosJWT);
+    }
     const renderItems = () => {
-        return (currentmenu.data.map((item, index) => {
+        return (
+            currentmenu.data.map((item, index) => {
             const isParent = !!item.children;
-
+            //Create space 
             if (item.block==='true'){
                 return(
                     <div key={index} className={cx(item.type)}></div>
                 )
             }
+            // Check the item have itemicon 
             if(item.iconitem === 'false'){
                 return (
                     <Stingitem 
@@ -31,20 +51,23 @@ function Menu({children}) {
                         linkitem={item.link}
                         text ={item.nameitem}
                         inputs={item.change}
-                        onclick={() =>{
-                            if(isParent){
+                        onclick= {() => {
+                            if(item.nameitem === "Log out"){
+                                handleLogout()
+                            }
+                            else if (isParent){
                                 setHistory(prev => [...prev ,item.children])
                             }
                         }}
-                        />
+                    />
                 );
             }
             else{
                 return (
                     <Stingitem key={index} 
                         icon={item.iconitem} 
-                    text ={item.nameitem}
-                    onclick={() =>{
+                        text ={item.nameitem}
+                        onclick={() =>{
                         if(isParent){
                             setHistory(prev => [...prev ,item.children])
                         }
@@ -56,6 +79,8 @@ function Menu({children}) {
         )
         );
     }
+
+    // Render the menu
     return (
         <Tippy
         trigger='click'
