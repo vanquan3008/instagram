@@ -5,7 +5,7 @@ const authSlice = createSlice({
     initialState: {
         // Login 
         login: {
-            currrentUser : null,
+            currentUser : null,
             isFetching : false,
             error : null,
         },
@@ -25,7 +25,7 @@ const authSlice = createSlice({
         },
         loginSucessfully : (state , action)=>{
             state.login.isFetching = false;
-            state.login.currrentUser = action.payload;
+            state.login.currentUser = action.payload;
             state.login.error = false;
         },
         
@@ -53,7 +53,7 @@ const authSlice = createSlice({
         },
         logOutSucessfully : (state)=>{
             state.login.isFetching = false;
-            state.login.currrentUser = null;
+            state.login.currentUser = null;
             state.login.error = false;
         },
         logOutError : (state)=>{

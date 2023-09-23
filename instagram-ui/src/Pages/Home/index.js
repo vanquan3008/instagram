@@ -64,14 +64,6 @@ const value = [
     }
 ]
 
-const usermain = {
-    buttontype : 'switch' ,
-    username : 'vanquan_12',
-    name: 'Văn Quân',
-    image:'https://th.bing.com/th/id/OIP.ClxiUPMj-9dNga0vVpK65gHaHa?pid=ImgDet&w=185&h=185&c=7&dpr=1.3',
-    namebutton: 'Switch'
-}
-
 const listSuggest = [
     {
         buttontype : 'following' ,
@@ -126,10 +118,17 @@ const listSuggest = [
 
 function Home() {
     const dispatch = useDispatch();
-    const user = useSelector((state)=>state.auth.login.currentUser)
+    const user = useSelector((state) => state.auth.login.currentUser);
+    const usermain = {
+        buttontype : 'switch' ,
+        username : user?.username,
+        name: user?.fullname ,
+        image:user?.profilePicture,
+        namebutton: 'Switch'
+    } 
     
 
-     createAxios(user,dispatch,loginSucessfully)
+    createAxios(user,dispatch,loginSucessfully)
    
 
 
@@ -233,6 +232,7 @@ function Home() {
                         <div className={cx('user')}>
                             <InfoGeneral 
                                 value={usermain} 
+                                imageSize={'big'}
                                 buttontype={usermain.buttontype} 
                                 namebutton={usermain.namebutton}
                                 story={'no'}
@@ -240,7 +240,7 @@ function Home() {
                                 nopadding={'yes'}
                             ></InfoGeneral>
                         </div>
-                        {/*Suggest for yoi  */}
+                        {/*Suggest for you */}
                         <div className={cx('guest')}>
                             <div className={cx('guest_main')}>
                                 <div className={cx('header')}>

@@ -13,14 +13,22 @@ import { Menu } from '~/Components/Layout/DefaultLayout/Menu/index.js';
 import { Imgs } from '~/Components/Image/index.js';
 import { SearchUI } from '~/Components/Layout/DefaultLayout/SearchUI/index.js';
 import { Notifi } from '../Notification';
+import { useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
 
 function Sidebar({type}) {
-    let clickMessage = null ;
-
+    let clickMessage = null;
     const [ClickSearch , setClickSearch] = useState(false);
     const [ClickNoti ,setClickNoti] = useState(false);
 
+    const user = useSelector((state) => state.auth.login.currentUser);
+    const imageUser = user?.profilePicture;
+
+
+   
+
+
+    //Logic load page messages 
     (type === 'Message'&& ClickNoti === false && ClickSearch===false) ? clickMessage = true:clickMessage = false;
     return (
             <div className={cx('mainsidebar')}>
@@ -94,9 +102,11 @@ function Sidebar({type}) {
                             })}
                             {/* Avatar */}
                             <li className={cx('container-list-item')}>
-                                <a className={cx('container-list-item-link')} href='/profile'>
+                                <a className={cx('container-list-item-link')} href={"/profile/"  + user?.username}>
                                     <div className={cx('avatar')}>
-                                        <Imgs src={require('~/Assets/img/avatar01.jpg')} alt={"AvatarProfile"} className={cx('AvatarProfile')} />
+                                        <Imgs 
+                                            src={imageUser === "" || imageUser === null ? image.noImage : imageUser} 
+                                            alt={"AvatarProfile"} className={cx('AvatarProfile')} />
                                     </div>
                                     <h2 className={
                                         cx('container-list-item-text', 

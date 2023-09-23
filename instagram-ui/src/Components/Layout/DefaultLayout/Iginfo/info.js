@@ -12,9 +12,11 @@ const cx = classNames.bind(styles)
 
 function InfoGeneral({
     href,
+    imageSize = 'medium',
     buttontype,
     namebutton,
-    value,imags,
+    value,
+    imags,
     story = 'yes',
     hoverelement = 'yes',
     nopadding = 'no'
@@ -26,11 +28,13 @@ function InfoGeneral({
                 )}>
             <a className={cx('account')} href={href}>
                 <div className={cx('Marginright14px')}>
-                    <AvatarImg img = {value.image}
+                    <AvatarImg 
+                        img = {value.image}
                         story={story}
+                        size={imageSize}
                     />
                 </div>
-                <div className={cx('info')}>
+                <div className={cx('info' , imageSize = "big" ? 'height--big' :'')}>
                     <a href="/" className={cx('username')}>
                         <a href="/">{value.username}</a>
                         <div className={cx(value.tickblue === true ? 'tick' :'hidden')}>

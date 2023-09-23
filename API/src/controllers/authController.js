@@ -14,6 +14,7 @@ const authController = {
                 username: req.body.username,
                 password: hashedPassword,
                 email: req.body.email,
+                fullname : req.body.username,
             })
             const user = await newUser.save()
             res.status(201).json(user)
@@ -68,7 +69,6 @@ const authController = {
     //[POST] /Refresh Token 
     refreshToken: async(req,res)=>{
         const rftoken =  req.cookies.refreshToken;
-        console.log(rftoken);
         if (!rftoken) {
             return res.status(401).json("You are not authenticated");
         }
@@ -101,8 +101,23 @@ const authController = {
             }
         )
         res.status(200)
+    },
+    //[GET]/
+    getUsername : async (req,res)=>{
+        try{
+            const user = await User.findOne({username : req.params.username});
+            if(user){
+                const {password , createdAt , updatedAt  , ...others} = user._doc; 
+                res.status(200).json(others);
+            }
+            else{
+                res.status(404).json({message : "User not found"});
+            }
+        }
+        catch(err){
+            res.status(404).json({message : "Error"});
+        }
     }
-
 
 }
 

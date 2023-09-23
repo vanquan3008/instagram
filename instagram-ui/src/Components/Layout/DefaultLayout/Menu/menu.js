@@ -4,16 +4,19 @@ import { MoreWrapper } from '../MoreSettings';
 import Tippy from '@tippyjs/react/headless';
 import styles from './MenuStyle.module.scss'
 import classNames from 'classnames/bind.js';
+
 import { listmore } from '../Sidebar/listsb.js';
 import MenuHeader from './Header.js';
 import { createAxios } from '~/createInstance.js';
+import { logOut } from '~/CallAPI/authApi.js';
+import { logOutSucessfully } from '~/Redux/authSlice.js';
+
 
 import { useNavigate } from 'react-router-dom';
-import { logOut } from '~/CallAPI/callApi.js';
 import { useSelector } from 'react-redux';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logOutSucessfully } from '~/Redux/authSlice.js';
+
 const cx = classNames.bind(styles);
 
 function Menu({children}) {
@@ -22,14 +25,14 @@ function Menu({children}) {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.login.currrentUser);
+    const user = useSelector((state) => state.auth.login.currentUser);
     const id = user?._id;
     const token = user?.token;
 
     const axiosJWT = createAxios(user , dispatch ,logOutSucessfully)
 
     
-    const handleLogout = () =>{
+    const handleLogout = async () =>{
         logOut(dispatch, id , navigate , token ,axiosJWT);
     }
     const renderItems = () => {

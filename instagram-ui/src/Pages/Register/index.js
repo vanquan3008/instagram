@@ -3,7 +3,7 @@ import style from "./RegisterStyle.module.scss";
 import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer";
 import  image from "~/Assets/img/index.js";
 import {Imgs} from "~/Components/Image/index.js";
-import { registerUser } from "~/CallAPI/callApi";
+import { registerUser } from "~/CallAPI/authApi";
 
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

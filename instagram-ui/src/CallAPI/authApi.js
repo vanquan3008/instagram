@@ -17,7 +17,7 @@ export const loginUser = async (user , dispatch , navigate) => {
     try{
         const res = await axios.post('http://localhost:3000/auth/login' , user); 
         dispatch(loginSucessfully(res.data)) 
-        navigate("/")
+        navigate(0)
     }
     catch(err){
         dispatch(loginError())
@@ -41,7 +41,6 @@ export const logOut = async ( dispatch , id , navigate , token , axiosJWT )=>{
         await axiosJWT.post('http://localhost:3000/auth/logout', id ,{
             headers : {token : `Bearer ${token}`}
         });
-        console.log(token)
         dispatch(logOutSucessfully())
         navigate('/')
     }

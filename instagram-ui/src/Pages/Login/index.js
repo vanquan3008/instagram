@@ -5,7 +5,7 @@ import style from "./LoginStyle.module.scss";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useState } from "react";
+//import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 import  image from "~/Assets/img/index.js";
 import {Imgs} from "~/Components/Image/index.js";
 import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer";
-import {loginUser} from "../../CallAPI/callApi.js";
+import {loginUser} from "../../CallAPI/authApi.js";
 import { useSelector } from "react-redux";
+import { useRef } from "react";
 
 
 const cx = classNames.bind(style);
@@ -22,27 +23,18 @@ const cx = classNames.bind(style);
 
 function Login() {
     //Create a vaiable
-    const [username , setusername] =useState("");
-    const [password , setpassword] =useState("");
+   const username  = useRef();
+   const password = useRef();
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const errorlogin = useSelector((state) => state.auth.login.error);
-    // const usercurrent = useSelector((state) => state.auth.login.currrentUser);
-
-    // useEffect(()=>{
-    //     if(usercurrent){
-    //         localStorage.setItem("user", JSON.stringify(usercurrent))
-    //     }
-    // },[usercurrent])
-
-
-
     //Function handler 
-    const handlesubmit = (e)=>{
+    const handlesubmit = async(e)=>{
+        e.preventDefault();
         const user = {
-            username:username,
-            password:password,
+            username:username.current.value,
+            password:password.current.value,
         }
         loginUser(user,dispatch,navigate);
     }
@@ -66,9 +58,7 @@ function Login() {
                                 type="text" 
                                 className={cx('input__user')}
                                 placeholder="Phone number,username" 
-                                onChange={(e)=>{
-                                    setusername(e.target.value)
-                                }}
+                                ref={username}
                             ></input>
                             <input 
                                 type="password"
@@ -76,11 +66,7 @@ function Login() {
                                 minLength={6}
                                 className={cx('input__password')}
                                 placeholder="Password" 
-                                onChange = {
-                                    (e)=>{
-                                        setpassword(e.target.value)
-                                    }
-                                }
+                                ref={password}
                             ></input>
                             <span className={cx('text-checkpassword',errorlogin ? '':'hidden')} >
                                 Sorry, your password was incorrect. Please double-check your password.

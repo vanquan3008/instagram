@@ -11,7 +11,7 @@ const publicRoutes = [
     { path: '/', component: Home },
     { path: '/reels', component: Reels },
     { path:'/messages', component: Messages },
-    { path:'/profile', component: Profile },
+    { path:'/profile/:username', component: Profile },
     { path:'/login', component: Login , Layout : null},
     { path:'/register', component: Register,Layout : null },
 ];

@@ -6,9 +6,32 @@ import { Imgs } from "~/Components/Image";
 import image from "~/Assets/img/index.js";
 import { icons } from "~/Assets/icons";
 import { DefaultLayout } from "~/Components/Layout";
+//import { useSelector } from "react-redux";
+import { useState, useEffect } from "react"
+import { useParams } from "react-router"
+import axios from "axios";
+
+
 const cx = classNames.bind(style);
 
 function Profile() {
+    const [user, setUser] = useState({
+        followers : [],
+        followings : [],
+    })
+    const username = useParams().username;
+
+    useEffect( () => {
+        const fetchUsers = async () => {
+            const restore = await  axios.get(`http://localhost:3000/auth/${username}`)
+            setUser(restore.data)
+        }
+        fetchUsers()
+    }, [username]);
+    console.log(user)
+    const countUserfollowers =  user.followers.length;
+    const countUserfollowings = user.followings.length
+
     return ( 
         <DefaultLayout>
             <div className={cx('register')}>
@@ -16,20 +39,23 @@ function Profile() {
                     <div className={cx('header')}>
                         <div className={cx('avatar')}>
                             <button className={cx('avatar__upload--btn')}>
-                                <Imgs className ={cx('avatar__img')}  src={image.noImage} ></Imgs>
+                                <Imgs 
+                                    className ={cx('avatar__img')}  
+                                    src = {user?.profilePicture === "" ? image.noImage : user.profilePicture}>    
+                                </Imgs>
                             </button>
                         </div>
                         <div className={cx('info__user')}>
                             <div className={cx('info__general')}>
                                 <div className={cx('info__name')} >
-                                   <a className={cx('info__name--link')} href="/">
-                                        vanquan_12
-                                    </a>
+                                   <button className={cx('info__name--link')} >
+                                        {user?.username}
+                                    </button>
                                 </div>
                                 <div className={cx('edit__profile')}>
-                                    <a className={cx('edit__profile--link')} href="/">
+                                    <button className={cx('edit__profile--link')}>
                                         Edit profile
-                                    </a>
+                                    </button>
                                 </div>
                                 <div className={cx('settings')}>
                                     <Imgs 
@@ -45,18 +71,18 @@ function Profile() {
                                     <span>0</span> post
                                 </li>
                                 <li className={cx('user__follower')}>
-                                    <span>0</span> followers
+                                    <span>{countUserfollowers}</span> followers
                                 </li>
                                 <li className={cx('user__following')}>
-                                    <span>0</span> followings
+                                    <span>{countUserfollowings}</span> followings
                                 </li>
                             </ul>
                             <div className={cx('info__detail')}>
                                 <div className={cx('fullname')}>
-                                    Văn Quân
+                                    {user.fullname}
                                 </div>
                                 <div className={cx('description')}>
-                                    Hôm nay là một ngày vui
+                                    {user.description}
                                 </div>
                             </div>
     
