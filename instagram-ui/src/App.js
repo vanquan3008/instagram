@@ -18,7 +18,6 @@ function App() {
                     <Route path="/reel" element={ <Reels/> }/>
                     <Route path="/messages" element={ <Messages/> }/>
                     <Route path="/profile/:username" element={ <Profile/> }/>
-
                 </Routes>
             </div>
         </BrowserRouter>
