@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 
-const ConversationSchema = new mongoose.Schema9({
+const ConversationSchema = new mongoose.Schema({
         members: {
-            type : 'Array',
+            type : Array,
             default : []
         },
     },
