@@ -9,7 +9,10 @@ router.post('/login',authController.loginUser);
 router.post('/logout',middleware.verifyToken,authController.logoutUser);
 router.post('/register',authController.registerUser);
 router.post('/refreshtoken',authController.refreshToken);
+router.get('/find/:id',authController.getUserID);
 router.get('/:username',authController.getUsername);
+
+
 
 
 module.exports = router;

@@ -5,9 +5,9 @@ const messageController = {
     // Create a message 
     //[POST]/
     createMessage : async (req,res)=>{
-        const {messageID , senderID , text} = req.body;
+        const {chatID , senderID , text} = req.body;
         const newMess = new Message({
-            chatID : messageID,
+            chatID : chatID,
             senderID :senderID,
             text : text ,
         })

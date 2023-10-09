@@ -5,7 +5,7 @@ const cx = classNames.bind(style);
 
 function MoreWrapper({children}) {
     return (
-    <div className={cx('Wrapper')}>
+    <div className={cx('wrapper')}>
         {children}
     </div>  
     );

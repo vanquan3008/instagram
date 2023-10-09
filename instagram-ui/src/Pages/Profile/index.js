@@ -28,7 +28,6 @@ function Profile() {
         }
         fetchUsers()
     }, [username]);
-    console.log(user)
     const countUserfollowers =  user.followers.length;
     const countUserfollowings = user.followings.length
 

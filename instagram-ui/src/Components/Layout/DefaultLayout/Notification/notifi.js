@@ -10,7 +10,7 @@ function Notifi({display}) {
     const renderListNoti = ListNoti.map(
         (value,index)=>{
             return (
-                <div className={cx('Contents')} 
+                <div className={cx('contents')} 
                     key={index}
                     >
                     <div className={cx('time')}>
@@ -18,7 +18,7 @@ function Notifi({display}) {
                             {value.time}
                         </span>
                     </div>
-                    <div className={cx('Noti-Contents')}>
+                    <div className={cx('noti-contents')}>
                     {
                         value.data.map(
                             (values,index)=>{
@@ -46,11 +46,11 @@ function Notifi({display}) {
             style={{display : display}}
         > 
             
-            <div className={cx('Title')}>
+            <div className={cx('title')}>
                 <span>Notification</span>
             
             </div>
-            <div className={cx('Contents')}>
+            <div className={cx('contents')}>
                 {renderListNoti}
             </div>
 

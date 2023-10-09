@@ -6,7 +6,7 @@ import image from "~/Assets/img/index.js";
 import { Imgs } from "~/Components/Image/index.js";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
-import { SlidesArticle } from "./Slide/index.js";
+import { SlidesArticle } from "../Slide/index.js";
 
 // const articles = 
 //     {

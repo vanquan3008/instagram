@@ -15,7 +15,7 @@
     flex-direction: column;
     animation: Scrollleftright ease-in 0.75s;
     overflow-y:auto;
-    .Title{ 
+    .title{ 
         padding: 16px 24px 24px;
         span{
             font-size: var(--system-default-fontsize-24);
@@ -24,7 +24,7 @@
             color: var(--default-text-color);
         }
     }
-    .Contents{
+    .contents{
         position: relative;
         .time{
             padding: 0 24px;
@@ -38,7 +38,7 @@
             }
         }
 
-        .Noti-Contents{
+        .noti-contents{
             margin-bottom: 20px; 
             &::before{
                  content: '';

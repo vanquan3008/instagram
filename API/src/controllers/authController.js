@@ -107,7 +107,7 @@ const authController = {
         try{
             const user = await User.findOne({username : req.params.username});
             if(user){
-                const {password , createdAt , updatedAt  , ...others} = user._doc; 
+                const {password , createdAt , updatedAt, token  , ...others} = user._doc; 
                 res.status(200).json(others);
             }
             else{
@@ -116,6 +116,22 @@ const authController = {
         }
         catch(err){
             res.status(404).json({message : "Error"});
+        }
+    },
+    //Get user by id
+    //[GET]/:id
+    getUserID : async (req, res) => {
+        try{
+            const user = await User.findOne({_id : req.params.id});
+            const {password , createdAt , updatedAt, token  , ...others} = user._doc;
+            if (others) {
+                res.status(200).json(others);
+            } else {
+                res.status(404).json("User not found");
+            }
+        }
+        catch(err){
+            res.status(500).json({message:"Not found"});
         }
     }
 

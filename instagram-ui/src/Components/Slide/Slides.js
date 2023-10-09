@@ -19,7 +19,7 @@ function SlidesArticle({Article_ImgsorVideo}) {
     const dots = []
     const ContentNumber = Article_ImgsorVideo.length
    
-
+    //Create dots 
     for(var index=0;index < ContentNumber;index++){
         dots.push(
             <li key= {index} className={cx('dot',index === active ?'active':'')}></li>

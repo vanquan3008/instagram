@@ -3,7 +3,7 @@ import styles from "./HomeStyle.module.scss"
 
 
 import { ImgStory } from "~/Components/Layout/DefaultLayout/imgStory";
-import { Article } from "./Article/index.js";
+import { Article } from "../../Components/Article/index.js";
 import image from "~/Assets/img";
 import { Imgs } from "~/Components/Image";
 

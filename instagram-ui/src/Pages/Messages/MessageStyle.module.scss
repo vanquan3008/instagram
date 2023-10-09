@@ -1,11 +1,17 @@
 .messages{
-    width: var(--default-width-listmessages);
-    border-right: 1px solid var(--default-border);
-    height: 100%;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    
+
     .messages-navigation{
+        border-right: 1px solid var(--default-border);
         display: flex;
         flex-direction: column;
         width: 100%;
+        width: 380px;
         .user ,
         .title{
             display: flex;
@@ -20,7 +26,6 @@
                     line-height: var(--system-default-lineheight-25);
                     font-weight: 700;
                 }
-
                 .icon-down{
                     width: 12px;
                     height: 12px;
@@ -52,7 +57,7 @@
                 }
             }
             .request{
-                .request-link{
+                .request--link{
                     line-height: var(--system-default-lineheight-18);
                     font-size: var(--system-default-fontsize-14);
                     font-weight: 600;
@@ -62,7 +67,64 @@
             }
         }
 
-        .list-messagesfriend{
+        .messagesfriend{ 
+            overflow-y: scroll;
+            overflow: auto;
+            .messagesfriend__list{
+               width: 100%;
+            }
+        }
+    }
+
+    .messages-main{
+        flex-grow: 1;
+        height: 100%
+        ;
+        // no click user messages
+        .main--noclick{
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-self: center;
+            text-align: center;
+            height: 100%;
+            .icon-message{
+                .icon-message--src{
+                    width: 96px;
+                    height: 96px;
+                }
+                width: 100%;
+            }
+            .title{
+                padding-top: 12px;
+                font-size: var(--system-default-fontsize-20);
+                line-height: var(--system-default-lineheight-32);
+                color: var(--default-text);
+                font-weight: 400;
+
+            }
+            .noti{
+                padding-top: 8px;
+                font-size: var(--system-default-fontsize-14);
+                line-height: var(--system-default-lineheight-18);
+                color: var(--default-secondary-text);
+                font-weight: 400;
+
+            }
+            .message__send--button{
+                padding-top: 20px;
+                .button{
+                    height: 32px;
+                    background-color: var(--default-blue);
+                    color: var(--default-white);
+                    padding: 0 18px;
+                    line-height: 32px;
+                    font-weight: 600;
+                    font-size: var(--system-default-fontsize-14);
+                    border-radius: 8px;
+                }  
+            }
 
         }
     }

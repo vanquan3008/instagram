@@ -15,7 +15,7 @@ function AvatarImg({
                     'img',
                     story ==='no'|| story ==='seen' ? story:'',
                     size)}>
-            <Imgs className = {cx('avatar')} src={img || image.noImage}></Imgs>
+            <Imgs className = {cx('avatar')} src={img || image.noAvatar}></Imgs>
         </div> 
     );
 }

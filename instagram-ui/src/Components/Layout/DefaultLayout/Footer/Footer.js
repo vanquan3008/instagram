@@ -43,7 +43,7 @@ function FooterLayOut() {
                 </ul>
             </div>
             <div className={cx('footer2')}>
-                <div className={cx('Language')}>
+                <div className={cx('language')}>
                     English 
                     <FontAwesomeIcon icon ={faChevronDown}></FontAwesomeIcon>
                 </div>

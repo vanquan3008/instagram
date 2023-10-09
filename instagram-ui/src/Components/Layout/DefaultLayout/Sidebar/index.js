@@ -25,11 +25,10 @@ function Sidebar({type}) {
     const imageUser = user?.profilePicture;
 
 
-   
-
-
     //Logic load page messages 
-    (type === 'Message'&& ClickNoti === false && ClickSearch===false) ? clickMessage = true:clickMessage = false;
+    (type === 'Message'&& ClickNoti === false && ClickSearch===false) ? clickMessage = true : clickMessage = false;
+
+    console.log(clickMessage)
     return (
             <div className={cx('mainsidebar')}>
                 <div className={
@@ -52,7 +51,7 @@ function Sidebar({type}) {
                             {listitem.map((item, index) => {
                                 return (
                                     <li className={cx('container-list-item',
-                                        clickMessage === true && item.nameitem ==='Message' ? 'onClickitem':'',
+                                        clickMessage === true && item.nameitem ==='Messages' ? 'onClickitem':'',
                                         ClickNoti === true && item.nameitem ==='Notification' ? 'onClickitem':'',
                                         ClickSearch === true && item.nameitem ==='Search' ? 'onClickitem':'',
                                     )} 
