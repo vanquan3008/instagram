@@ -11,22 +11,51 @@ import { DefaultLayout } from "~/Components/Layout";
 
 import { icons } from "~/Assets/icons";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Conversation } from "~/Components/Conversation";
 import ChatBox from "~/Components/ChatBox/chatBox";
+import {io} from 'socket.io-client';
 
 const cx = classNames.bind(styles)
-// const userchat = 
-//     {
-//         username : 'Quân',
-//     }
 
 function Messages() {
     const [conversations , setconversations] = useState([])
     const [currentChat , setCurrentChat] = useState(null)
     const [curretUserChat , setCurretUserChat] = useState(null)
+    const [userOnline , setUserOnline] = useState([])
+    const [sendMessage ,setSendMessage] = useState(null);
+    const [recieverMessage ,setRecieverMessage] = useState(null)
     const currentuser = useSelector((state)=>state.auth.login.currentUser);
+    
+    //Socket
+    const socket = useRef();
+    useEffect(()=>{
+        socket.current = io('http://localhost:8900');
+    },[]);
+
+    useEffect(()=>{
+        socket.current.emit("addNewuser" , currentuser._id);
+        socket.current.on("getusers" ,(users)=>{
+            setUserOnline(users)
+        })
+    },[currentuser])
+    //Send and receive messages
+    useEffect(()=>{
+        if(sendMessage !== null){
+            socket.current.emit('send-message', sendMessage);
+        }
+    },[sendMessage])
+
+    useEffect(() => {
+        socket.current.on("reciever-message", (data) => {
+          console.log(data)
+          setRecieverMessage(data);
+        });
+      }, []);
+
+
+
     //Get conversation
     useEffect(() =>{
         const getConversation = async() =>{
@@ -98,6 +127,7 @@ function Messages() {
                                         key={index}
                                         conversation={conversation} 
                                         currentuser={currentuser}
+                                        userOnline={userOnline}
                                     ></Conversation>
                                 </li>
                             
@@ -129,6 +159,8 @@ function Messages() {
                                      <ChatBox userChat={curretUserChat} 
                                               userCurrent ={currentuser._id}
                                               chatID = {currentChat._id}
+                                              setSendMessage = {setSendMessage}
+                                              recieverMessage={recieverMessage}
                                     ></ChatBox>
                                 }
                             

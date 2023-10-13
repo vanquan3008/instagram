@@ -6,7 +6,7 @@
     .chat-box__header{
         display: flex;
         flex-direction: row;
-        height: 75px;
+        min-height: 75px;
         border-bottom: 0.8px solid var(--default-border );
         padding: 0 16px;
         align-items:  center;
@@ -48,6 +48,7 @@
         flex-grow: 0;
         padding: 16px;
         position: relative;
+        z-index: 1;
         .chat-input__icon,
         .chat-input__send{
             position: absolute;
@@ -55,19 +56,29 @@
             top : 50%;
             transform: translateY(-50%);
             display: flex;
-            flex-direction: row;
+            flex-direction: row;       
+            z-index: 2;
             .chat-input__icon-mic,
             .chat-input__icon-addimg,
             .chat-input__icon-like{
-                padding: 8px;
+                padding: 8px; 
+                cursor: pointer; 
+                &:hover{
+                    opacity: 0.2;
+                }
             }
 
-            span{
+            .send__button{
                 color: var(--default-blue);
                 font-weight: 500;
                 font-size: var(--system-default-fontsize-14);
                 line-height: var(--system-default-lineheight-18);
+                cursor: pointer;
+                &:hover{
+                    opacity: 0.2;
+                }
             }
+            
         }
     }
 }

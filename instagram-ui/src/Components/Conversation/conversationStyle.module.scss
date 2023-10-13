@@ -27,10 +27,18 @@
             line-height: var(--system-default-lineheight-14);
             color: var(--default-secondary-text);
             font-weight: 400;
+            display: flex;
+            flex-direction: row;
             span{
                 margin: auto 4px;
                 height: 18px;
                 align-items: center;
+            }
+            .text__message{
+                width: 160px; /* Đặt chiều rộng tùy ý */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }

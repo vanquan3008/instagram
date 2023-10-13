@@ -9,7 +9,10 @@ const cx = classNames.bind(style)
 function SendMessage({own , message}) {
     return ( 
         <div className={cx("chat")}>
-            <div className={cx(own === true ? 'currentuser': 'user' )}>
+            <div className={cx(own === true ? 'currentuser': 'user' )}> 
+                <time className={cx('time-chat')}>
+                    {format(message.createdAt)}
+                </time>
                 <div className={cx('chat-body')}>
                     {
                         own === false ? 
@@ -22,9 +25,7 @@ function SendMessage({own , message}) {
                         {message.text}
                     </div> 
                 </div>
-                <time className={cx('time-chat')}>
-                    {format(message.createdAt)}
-                </time>
+               
             </div>
         </div>
     );

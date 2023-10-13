@@ -14,7 +14,7 @@ const cx = classNames.bind(style);
 
 
 
-function ChatBox({userChat , userCurrent ,chatID}) {
+function ChatBox({userChat , userCurrent ,chatID ,setSendMessage ,recieverMessage}) {
     const scrollEnd = useRef()
     const [text , setText] =  useState("")
     const [messages ,setmessages] = useState([])
@@ -36,6 +36,30 @@ function ChatBox({userChat , userCurrent ,chatID}) {
         scrollEnd.current?.scrollIntoView({behavior: "smooth"})
     }, [messages])
 
+
+    useEffect(()=>{
+        if(recieverMessage !== null  && recieverMessage?.chatID === chatID){
+            setmessages(m=>[...m , recieverMessage])
+        }
+    },[recieverMessage , chatID])
+
+    // Socket
+    const senderMessage = async (e)=>{
+        //Send server  
+        const message = {
+            chatID : chatID,
+            senderID : userCurrent, 
+            text: text
+        }
+        try{ 
+            const newMessage = await axios.post('http://localhost:3000/message', message);
+            setmessages([...messages , newMessage.data])
+        }
+        catch(e){
+            console.log(e)
+        }
+        setSendMessage({...message , recieverId : userChat._id})
+    };
 
 
     return (
@@ -89,6 +113,7 @@ function ChatBox({userChat , userCurrent ,chatID}) {
                     onChange={setText}
                     cleanOnEnter
                     placeholder="Type a message"
+                
                 />
                 <div className={cx('chat-input__icon',text!== "" ? 'hidden' :'')}>
                     <div className={cx('chat-input__icon-mic')}>
@@ -101,8 +126,13 @@ function ChatBox({userChat , userCurrent ,chatID}) {
                         <Imgs src = {icons.iconLikeHeart}></Imgs>
                     </div>
                 </div>
-                <div className={cx('chat-input__send', (text === "") ? 'hidden' :'')}>
-                    <span>Send</span>
+                <div 
+                        className={cx('chat-input__send', (text === "") ? 'hidden' :'')} 
+                        onClick={senderMessage} 
+                >
+                    <div className={cx('send__button')}>
+                        Send
+                    </div>
                 </div>
             </div>
         </div>

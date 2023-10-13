@@ -1,12 +1,17 @@
 import classNames from "classnames/bind";
 import style from "./conversationStyle.module.scss";
-import image from "~/Assets/img";
-import { AvatarImg } from "../AvatarImg";
- import { useState ,useEffect } from "react";
 import axios from "axios";
 
+import { format } from "timeago.js";
+
+import image from "~/Assets/img";
+import { AvatarImg } from "../AvatarImg";
+import { useState ,useEffect } from "react";
+
+
+
 const cx = classNames.bind(style);
-function Conversation({conversation , currentuser}) {
+function Conversation({conversation , currentuser , userOnline}) {
     const [user , setUser] = useState(null);
     useEffect(() => {
         const getListFriend= async ()=>{ 
@@ -22,11 +27,10 @@ function Conversation({conversation , currentuser}) {
         getListFriend()
     },[currentuser , conversation])
 
-
     return ( 
        
         <div className={cx('conversation')}>
-            <div className={cx('conversation__avatar')}>
+            <div className={cx('conversation__avatar ')}>
                 <AvatarImg className={cx('image')}
                       src = {user?.image ? user.image : image.noAvatar}
                       size={'big'}
@@ -39,11 +43,13 @@ function Conversation({conversation , currentuser}) {
                         {user?.username}
                     </span>
                     <div className={cx('conversation__main-space')}></div>
-                    <div className={cx('conversation__main-lastmessage')}>
-                        Xíu về đi chơi
+                    {/* <div className={cx('conversation__main-lastmessage')}>
+                        <div className={cx('text__message')}>
+                            {lastMessage?.senderID === currentuser._id ? 'You : '+ lastMessage?.text : lastMessage?.text}
+                        </div>
                         <span>·</span>
-                        5d
-                    </div>
+                        <div className={cx('time')}>{format(lastMessage?.createdAt)}</div>
+                    </div> */}
                 </div>
     
             </div>
