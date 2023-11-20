@@ -8,14 +8,16 @@ const cx = classNames.bind(styles)
 function AvatarImg({
         img,
         size = 'medium',
-        story}) {
+        story,
+        online
+    }) {
     return ( 
-        <div 
-            className={cx(
-                    'img',
+        <div className={cx('img',
                     story ==='no'|| story ==='seen' ? story:'',
-                    size)}>
+                    size)
+                }>
             <Imgs className = {cx('avatar')} src={img || image.noAvatar}></Imgs>
+            <div className={cx( online === true ?'online' : ' ')}></div>
         </div> 
     );
 }

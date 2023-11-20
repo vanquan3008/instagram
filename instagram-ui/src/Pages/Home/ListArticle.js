@@ -5,7 +5,7 @@ const _articles = [
         tickgreen : true,
         friend : false,
         likes : 1,
-        textpost : 'Quân đã chia sẻ những thứ này . ',
+        textpost : ' hj hi',
         _comment : [
             {
                 user : 'Quan',

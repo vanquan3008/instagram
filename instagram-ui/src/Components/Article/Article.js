@@ -5,48 +5,49 @@ import { faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import image from "~/Assets/img/index.js";
 import { Imgs } from "~/Components/Image/index.js";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlidesArticle } from "../Slide/index.js";
-
-// const articles = 
-//     {
-//         username : 'Quan',
-//         day_post: '1d',
-//         tickgreen : true,
-//         friend : false,
-//         likes : 1,
-//         textpost : 'Quân đã chia sẻ những thứ này . ',
-//         _comment : [
-//             {
-//                 user : 'Quan',
-//                 comment : 'hihihi',
-//                 like : 123,
-//             }
-//         ],
-
-//         Article_ImgsorVideo : [
-//             {
-//                 type : 'video',
-//                 src : 'https://files.fullstack.edu.vn/f8-tiktok/videos/2917-64cdd37e9ad19.mp4',
-//             },
-//             {
-//                 type : 'img',
-//                 src: 'https://th.bing.com/th/id/OIP.ClxiUPMj-9dNga0vVpK65gHaHa?pid=ImgDet&w=185&h=185&c=7&dpr=1.3',
-//             },
-//             {
-//                 type : 'img',
-//                 src: 'https://th.bing.com/th/id/OIP.ClxiUPMj-9dNga0vVpK65gHaHa?pid=ImgDet&w=185&h=185&c=7&dpr=1.3',
-//             }
-//         ]
-//     }
+import { useDispatch, useSelector } from "react-redux";
+import { followFunction, unfollowFunction } from "~/CallAPI/authApi";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const cx = classNames.bind(styles);  
 
 function Article({articles}) {
-    const [valueComment , setValueComment] = useState("")
-    const [friendfollow , setfriendfollow] = useState(articles.friend)
+    const [valueComment , setValueComment] = useState("");
+    const [friendfollow , setfriendfollow] = useState(null);
+    const [onclickPost , setonclickPost] = useState(null);
+    const currentuser = useSelector((state)=>state.auth.login.currentUser);
+    const dispatch = useDispatch();
 
+
+    
+    const onClickPost = async (e)=>{
+        setonclickPost(articles)
+        if(onclickPost?.userId !== currentuser._id &&onclickPost !== null ){
+            followFunction(onclickPost?.userId  ,currentuser ,dispatch)
+        }
+        if(currentuser?.followings.includes(onclickPost?.userId) && onclickPost !== null ){
+            unfollowFunction(onclickPost?.userId  ,currentuser ,dispatch)
+        }
+    }   
+    console.log(currentuser?.followings.includes(onclickPost?.userId))
+    useEffect(()=>{
+        const renderListFriend = async ()=> {
+            const renderUser = await axios.get(`http://localhost:3000/auth/find/` + currentuser?._id);
+            renderUser?.data.followings.map((userId)=>{
+                if(userId === articles.userId){
+                    setfriendfollow(true)
+                }
+                else{
+                    setfriendfollow(false)
+                }
+            })
+        }
+        renderListFriend()
+    },[onclickPost])
     return ( 
         <div className={cx('Article')}>
             {/* Header */}
@@ -56,8 +57,8 @@ function Article({articles}) {
                 </a>
                 <div className={cx('Posted_By')}>
                     <a href="/" className={cx('Posted_Name')}>
-                        <div>{articles.username}</div>
-                        <div className={cx('tick',articles.tickgreen ? "" :'hidden')}>
+                        <div>{articles?.username}</div>
+                        <div className={cx('tick',articles?.tickgreen ? "" :'hidden')}>
                             <Imgs className={cx('tick_icon')} src={image.tickgreen}></Imgs>
                         </div>
                     </a>
@@ -65,21 +66,25 @@ function Article({articles}) {
                         <span className = {cx('dot')}>
                             <span>•</span>
                         </span>
-                        <time>{articles.day_post}</time>
+                        <time>{articles?.day_post}</time>
                     </a>
                     <div className={cx('Follow')}>
                         <div className = {cx('dot')}>
                             <span>•</span>
                         </div>
-                        <h4 className={cx('textFollow')}
-                            onClick={()=>{
-                                setfriendfollow(!friendfollow);
-                            }}
-                        >
-                            {
-                               friendfollow ===  true ? 'Following' :'Follow'
-                            }
-                        </h4>
+                        {
+                            currentuser?._id === articles?.userId ? 
+                            <h4 className={cx('textFollow')}>
+                                You
+                            </h4>:
+                            <h4 className={cx('textFollow')}
+                                onClick={onClickPost}
+                            >
+                                {
+                                    friendfollow ===  true ? 'Following' :'Follow'
+                                }
+                            </h4>
+                        }
                     </div>
                 </div>
                 <div className={cx('more')}>
@@ -87,7 +92,7 @@ function Article({articles}) {
                 </div>
             </div>
             {/* Article */}
-            <SlidesArticle Article_ImgsorVideo={articles.Article_ImgsorVideo}></SlidesArticle>
+            <SlidesArticle Article_ImgsorVideo={articles?.Article_ImgsorVideo}></SlidesArticle>
             {/* Comment Like share */}
             <div className={cx('More_Post')}>
                 <div className={cx('Lable')}>
@@ -150,7 +155,7 @@ function Article({articles}) {
                     </div>
                     {/* Nếu k có bạn bè like */}
                     <div className={cx('NoFriend_like')}>
-                        {articles.likes}<span>likes</span>
+                        0<span>likes</span>
                     </div>
                 </div>
 
@@ -158,9 +163,9 @@ function Article({articles}) {
                 <div className={cx('Info_Post')} >
                     <div className={cx('Title')}>
                         <button className={cx('User_Post')}>
-                            {articles.username}
+                            {articles?.username}
                         </button>
-                        {articles.textpost}
+                        {articles?.textpost}
 
                     </div>
                     {/* Text more after click text 'more' */}
@@ -173,7 +178,7 @@ function Article({articles}) {
                     {/* Comment */}
                     <div className={cx('List_Comment')}>
                         <span className={cx('ShowComment')}>
-                            View all {articles._comment.length} comments
+                            View all {articles?._comment.length} comments
                         </span>
                         <section className={cx('Input_Comment')}>
                             <div className={cx('WrapperInput')}>

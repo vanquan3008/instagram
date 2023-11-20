@@ -1,0 +1,96 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color:var(--default-color-background-clickbutton);
+    .userfollowing{
+        width: 400px;
+        background-color: var(--default-white);
+        border-radius: 24px;
+        overflow: hidden;
+        .titles{
+            height: 110px;
+            width: 100%;
+            position: relative;
+            border-bottom: 1px solid var(--default-border);
+            .user__current{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 16px;
+                
+            }
+            .user__username{
+                height: 11px;
+                font-size: var(--system-default-fontsize-14);
+                line-height: var(--system-default-lineheight-18);
+                font-weight: 600;
+                
+            }
+            
+        }
+        .close{
+            position: absolute;
+            top:0;
+            right: 0;
+            padding: 4px 8px;
+            .close-icon{
+                width: 18px;
+                height: 18px;
+                padding: 8px;
+            }
+        }
+        .body{
+            width: 100%;
+            .list{
+                .list__item{
+                    display: flex;
+                    flex-direction: row;
+                    padding: 16px;
+                    .list__item--text{
+                        flex-grow: 1;
+                        font-size: var(--system-default-fontsize-14);
+                        line-height: var(--system-default-lineheight-18);
+                        color: var(--default-text-color);
+                    }
+                    .list__item--item{
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 12px;
+                    }
+                    &:hover{
+                        background-color: var(--default-color-hover);
+                        overflow: visible;
+                        
+                    }
+                    .list__item--box{
+                        border-radius: 50%;
+                        width: 21px;
+                        height: 21px;
+                        margin-left: 12px;
+                        overflow: hidden;
+                        .list__item--itembox{
+                            width: 20px;
+                            height: 20px;
+                        }
+                        .onClick{
+                            background-color: var(--default-green);
+                        }
+                    }
+                    .border__cover{
+                        border: 0.8px solid var(--default-black);
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+.hidden{
+    display: none !important;
+}

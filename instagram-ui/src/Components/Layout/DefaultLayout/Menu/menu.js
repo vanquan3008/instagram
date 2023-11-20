@@ -5,7 +5,7 @@ import Tippy from '@tippyjs/react/headless';
 import styles from './MenuStyle.module.scss'
 import classNames from 'classnames/bind.js';
 
-import { listmore } from '../Sidebar/listsb.js';
+// import { listmore } from '../Sidebar/listsb.js';
 import MenuHeader from './Header.js';
 import { createAxios } from '~/createInstance.js';
 import { logOut } from '~/CallAPI/authApi.js';
@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 
 const cx = classNames.bind(styles);
 
-function Menu({children}) {
+function Menu({children , listmore}) {
     const [history , setHistory] = useState([{data : listmore}]);
     const currentmenu  = history[history.length - 1];
     const dispatch = useDispatch();
@@ -30,11 +30,12 @@ function Menu({children}) {
     const token = user?.token;
 
     const axiosJWT = createAxios(user , dispatch ,logOutSucessfully)
-
     
     const handleLogout = async () =>{
         logOut(dispatch, id , navigate , token ,axiosJWT);
     }
+
+
     const renderItems = () => {
         return (
             currentmenu.data.map((item, index) => {
@@ -89,7 +90,8 @@ function Menu({children}) {
         trigger='click'
         placement='top-start'
         interactive
-        render={attrs => (
+        render={
+            attrs => (
             <div className= {cx('Menu')} tabIndex="-1" {...attrs}>
                 <MoreWrapper>
                     {history.length > 1  && 
@@ -104,8 +106,8 @@ function Menu({children}) {
                     {renderItems()}
                 </MoreWrapper>
             </div>
-        
-            )}
+            )
+        }
 
         onHidden={()=>{
             setHistory(prev =>prev.slice(0,1))

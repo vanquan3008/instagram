@@ -9,7 +9,9 @@ import {
     registerError,
     logOutStart,
     logOutSucessfully,
-    logOutError 
+    logOutError ,
+    userFollowSucessfully ,
+    userUnFollowSucessfully
 } from "~/Redux/authSlice";
 
 export const loginUser = async (user , dispatch , navigate) => {
@@ -46,5 +48,27 @@ export const logOut = async ( dispatch , id , navigate , token , axiosJWT )=>{
     }
     catch(error){
         dispatch(logOutError())
+    }
+}
+
+// follow 
+export const followFunction  = async (userid, userCurrent , dispatch ) =>{
+    await axios.put(`http://localhost:3000/auth/${userid}/follower` , {"userId" : userCurrent._id})
+    try{
+        dispatch(userFollowSucessfully(userid))
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+//unfollow
+export const unfollowFunction  = async (userid, userCurrent , dispatch) =>{ 
+    await axios.put(`http://localhost:3000/auth/${userid}/unfollower` , {"userId" : userCurrent._id})
+    try{
+        dispatch(userUnFollowSucessfully(userid))
+    }
+    catch(error){
+        console.log(error)
     }
 }

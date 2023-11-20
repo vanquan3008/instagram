@@ -10,7 +10,6 @@ const authSlice = createSlice({
             error : null,
         },
         //Register
-
         register : {
             isFetching : false,
             error : null,
@@ -61,6 +60,16 @@ const authSlice = createSlice({
             state.login.error = true;
         },
 
+        // Follow
+        userFollowSucessfully : (state , action)=>{
+            state.login.currentUser.followings = [...state.login.currentUser.followings , action.payload];
+        },
+            
+           
+        //Unfollow
+        userUnFollowSucessfully : (state , action)=>{
+            state.login.currentUser.followings = state.login.currentUser.followings.filter(following => following !== action.payload)
+        },
     }
 })
 
@@ -73,7 +82,10 @@ export const {
     registerError,
     logOutStart,
     logOutSucessfully,
-    logOutError
+    logOutError,
+
+    userFollowSucessfully,
+    userUnFollowSucessfully
 } = authSlice.actions;
 
 export default authSlice.reducer;

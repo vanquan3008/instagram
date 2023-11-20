@@ -45,7 +45,7 @@ const middleware = {
             
             {expiresIn : "365d"}
         )
-    }
+    },
 }
 
 module.exports = middleware;

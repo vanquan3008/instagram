@@ -89,6 +89,80 @@
                         } 
                     }
                 }
+            
+                .not_own{
+                    display: flex;
+                    flex-direction: row;
+                    margin-left: 20px;
+                    .list__button{
+                        margin: auto;
+                        .list__button--follower{
+                            display: flex;
+                            flex-direction: row;
+                            cursor: pointer;
+                            .button--folloing,
+                            .button--message{
+                                border-radius: 8px;
+                                padding: 7px 16px;
+                                font-size: var(--system-default-fontsize-14);
+                                margin-left: 8px;
+                                font-weight: 400;
+                                line-height: var(--system-default-lineheight-18);
+                                background-color: var(--default-color-button);
+
+                                &:hover{
+                                    background-color: rgb(219,219,219);
+                                }
+                            }
+                            .button--folloing{
+                                .button--folloingicon{
+                                    margin-left: 8px;
+                                }
+                                &:hover{
+                                    opacity: 0.6;
+                                }
+                            }
+                            
+                        }
+                        .button__follow{
+                           padding: 7px 16px;
+                           background-color: var(--default-blue);
+                           font-size: var(--system-default-fontsize-14);
+                           line-height: var(--system-default-lineheight-18);
+                           color: var(--default-white);
+                           border-radius: 8px;
+                           margin-left: 8px;
+                           font-weight: 400;
+                        }
+                    }
+                    .similar__account{
+                        background-color: var(--default-color-button);
+                        border-radius: 8px;
+                        margin-left: 8px;
+                        margin-top: auto;
+                        margin-bottom: auto;
+                        width: 34px;
+                        height: 32px;
+                        .similar__account--icon{
+                            width: 18px;
+                            height: 16px;
+                            padding: 8px;
+                        }
+                        &:hover{
+                            background-color: rgb(219,219,219);
+                        }
+                    }
+                    .Options{
+                        margin-left: 8px;
+                        width: 48px;
+                        height: 48px;
+                        .options-icon{
+                            width: 24px;
+                            height: 24px;
+                            padding: 12px;
+                        }
+                    }
+                }
                 .space_20{
                     margin-bottom: 20px;
                 }

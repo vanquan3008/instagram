@@ -61,20 +61,21 @@ function ChatBox({userChat , userCurrent ,chatID ,setSendMessage ,recieverMessag
         setSendMessage({...message , recieverId : userChat._id})
     };
 
-
     return (
         <div className={cx("chat-box")}>
             {/* Header chat box */}
            <header className={cx("chat-box__header")}>
-                <div className={cx("header__user")}>
+                <a href={"/profile/"  + userChat?.username} className={cx("header__user")}>
                     <AvatarImg 
                         className ={cx('header__user-img')} 
-                        src = {userChat?.image ? userChat.image : image.noAvatar}>    
+                        img = {userChat?.profilePicture ? userChat.profilePicture : image.noAvatar}
+                        story={"no"}
+                    >    
                     </AvatarImg>
                     <div className={cx('header__user-name')}>
                         {userChat?.username}
                     </div>
-                </div>
+                </a>
                 {/* Call video and vv... */}
                 <div className={cx('header__fc-other')}>
                     <div className={cx('header__fc-other--icon')}>
@@ -111,9 +112,10 @@ function ChatBox({userChat , userCurrent ,chatID ,setSendMessage ,recieverMessag
                 <InputEmoji
                     value={text}
                     onChange={setText}
+                    onEnter={senderMessage}
                     cleanOnEnter
                     placeholder="Type a message"
-                
+                    className={cx('chat-input__text')}
                 />
                 <div className={cx('chat-input__icon',text!== "" ? 'hidden' :'')}>
                     <div className={cx('chat-input__icon-mic')}>

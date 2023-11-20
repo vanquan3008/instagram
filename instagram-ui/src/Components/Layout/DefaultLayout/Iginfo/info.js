@@ -7,6 +7,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "~/Components/Button/index.js";
 
 import { AvatarImg } from "~/Components/AvatarImg/index.js";
+import { useEffect, useRef, useState } from "react";
 
 const cx = classNames.bind(styles)
 
@@ -19,14 +20,31 @@ function InfoGeneral({
     imags,
     story = 'yes',
     hoverelement = 'yes',
-    nopadding = 'no'
+    nopadding = 'no',
+    checkUser,
+    setcheckUser,
+    unCheckbox
 }) {
+    const checkRef = useRef();
+
+    function onClicknoEvent(e){
+        if(buttontype ==='checkbox'){
+            e.preventDefault();
+            if(checkUser === null){
+                checkRef.current.checked = !checkRef.current.checked;
+                setcheckUser(value)
+            }
+        }
+    }
+
+    
+
     return (
         <div className={cx('Wrapper',
                     hoverelement ==='no' ? 'nohover':'',
                     nopadding ==='yes' ? 'nopadding':''
                 )}>
-            <a className={cx('account')} href={href}>
+            <a className={cx('account')} href={href} onClick={onClicknoEvent}>
                 <div className={cx('Marginright14px')}>
                     <AvatarImg 
                         img = {value.image}
@@ -50,28 +68,41 @@ function InfoGeneral({
                     </div>
                 </div>
                 {/* Button */}
+                {/* Type follow */}
                 <div className={
                     cx('followingorSwitch' , 
                         (buttontype !== 'following' && 'hidden')&& (buttontype !== 'switch' && 'hidden')
                     )
                 }>
                     {namebutton}
-                </div>
-                <div className={cx('close',buttontype !== 'close' && 'hidden')}>
-                    <FontAwesomeIcon className={cx('iconclose')} icon = {faClose} />
-                </div>
-
+                </div>                
                 <Button type ={buttontype} 
                         primary={namebutton === 'Follow' ? 'Blue' : 'defaultButton'}
                 > 
                     {namebutton}
                 </Button>
+                {/* Close */}
+                <div className={cx('close',buttontype !== 'close' && 'hidden')}>
+                    <FontAwesomeIcon className={cx('iconclose')} icon = {faClose} />
+                </div>
 
+
+                {/* Image */}
                 <div className={cx('image',buttontype !== 'image' && 'hidden')}>
                    <Imgs className={cx('imgnofi')} 
                          src = {imags || image.noImage}
                     ></Imgs>
                 </div>
+
+                {/* Tick - checkbox */}
+                <input
+                    className={cx('checkbox', buttontype !== 'checkbox' && 'hidden')}
+                    type="checkbox"
+                    ref={checkRef}
+                    checked={unCheckbox ? undefined  : false}
+                >
+                </input>
+
             </a>
         </div>  
     );

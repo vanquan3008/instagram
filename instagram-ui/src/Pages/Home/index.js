@@ -7,16 +7,19 @@ import { Article } from "../../Components/Article/index.js";
 import image from "~/Assets/img";
 import { Imgs } from "~/Components/Image";
 
-import { _articles, _articlesSuggest} from "./ListArticle.js";
+// import { _articlesSuggest  } from "./ListArticle.js";
 import InfoGeneral from "~/Components/Layout/DefaultLayout/Iginfo/info";
 import { FooterLayOut } from "~/Components/Layout/DefaultLayout/Footer/index.js";
 import { DefaultLayout } from "~/Components/Layout";
 
-
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector  } from "react-redux";
 import { useDispatch } from "react-redux";
 import {createAxios} from '../../createInstance.js';
 import { loginSucessfully } from "~/Redux/authSlice";
+import { useEffect } from "react";
+import axios from "axios";
+import { format } from "timeago.js"
 const cx = classNames.bind(styles)
 const value = [
     {
@@ -118,7 +121,9 @@ const listSuggest = [
 
 function Home() {
     const dispatch = useDispatch();
+    const [_articles, setarticles] = useState([]);
     const user = useSelector((state) => state.auth.login.currentUser);
+    const [_articlesSuggest ,setarticlesSucess] = useState([])
     const usermain = {
         buttontype : 'switch' ,
         username : user?.username,
@@ -131,8 +136,7 @@ function Home() {
     createAxios(user,dispatch,loginSucessfully)
    
 
-
-    // Trả về bài viết 
+    
     const renderStory  = value.map((value,index)=>{
         return(
            <li key={index} className={cx('StoryItem')}>
@@ -141,8 +145,26 @@ function Home() {
             </li>
         )
     })
+    // Trả về bài viết 
+    useEffect(()=>{
+        const renderPost = async ()=>{
+            const listPost = await axios.get("http://localhost:3000/post/timeline/" + user._id)
+            const  PostNew=listPost.data.map((value)=>{
+                const {createdAt , updatedAt , ...other} = value;
+                other.day_post = format(createdAt)
 
-    const renderPost = _articles.map(
+                return other;
+            })
+            setarticles(PostNew)
+        }
+        renderPost()
+    },[user])
+
+    const _articles_line = _articles.map((cur, index) => {
+        return _articles[_articles.length - index - 1];
+    });
+    // Render
+    const renderPost = _articles_line.map(
         (value,index)=>{
             return(
                 <Article key={index} articles={value}></Article>
@@ -150,7 +172,27 @@ function Home() {
         }
     )
 
-    const renderPostSuggest = _articlesSuggest.map(
+
+    useEffect(()=>{
+        const renderPost = async ()=>{
+            const listPostSuccess = await axios.get("http://localhost:3000/post/timeline/postsuccess/" + user._id)
+            const  PostNewSuccess=listPostSuccess.data.map((value)=>{
+                const {createdAt , updatedAt , ...other} = value;
+                other.day_post = format(createdAt)
+
+                return other;
+            })
+            setarticlesSucess(PostNewSuccess)
+        }
+        renderPost()
+    },[user])
+
+    const _articlesSuccess_line = _articlesSuggest.map((cur, index) => {
+        return _articlesSuggest[_articlesSuggest.length - index - 1];
+    });
+
+    
+    const renderPostSuggest = _articlesSuccess_line.map(
         (value,index)=>{
             return(
                 <Article key={index} articles={value}></Article>

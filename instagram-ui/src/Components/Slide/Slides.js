@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 import { Imgs } from '~/Components/Image';
-function getFileExtension(filename){
-    var ext = /^.+\.([^.]+)$/.exec(filename);
-    return ext == null ? "" : ext[1];
-}
+// function getFileExtension(filename){
+//     var ext = /^.+\.([^.]+)$/.exec(filename);
+//     return ext == null ? "" : ext[1];
+// }
 const cx = classNames.bind(styles)
 //Ham chinh
 function SlidesArticle({Article_ImgsorVideo}) {
@@ -32,20 +32,20 @@ function SlidesArticle({Article_ImgsorVideo}) {
         <article className={cx('Content_Post')} key={index}>
             {/* Nếu source là img */}
             <Imgs  
-                className={cx('Image_Post', getFileExtension(value.src) ==="mp4" && 'hidden')} 
-                src = {getFileExtension(value.src) !=="mp4" ? value.src : undefined}>
+                className={cx('Image_Post', value.type ==="video/mp4" && 'hidden')} 
+                src = {value.type !== "video/mp4"  ? value.src : undefined}>
             </Imgs>
 
             {/* Nếu source là video */}
            <div className={cx('Video',
-                            getFileExtension(value.src) !=="mp4" && 'hidden')}>
+                            value.type !=="video/mp4" && 'hidden')}>
                 <video  className={cx('Video_Post')}
                         ref={ref} 
                         autoPlay
                         loop
                         muted={!Muted}
                 >
-                    <source src={getFileExtension(value.src) ==="mp4" ? value.src : undefined}
+                    <source src={value.type === "video/mp4" ? value.src : undefined}
                             type={"video/mp4"}
                     >  
                     </source>

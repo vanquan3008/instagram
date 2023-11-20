@@ -9,5 +9,12 @@ export const  icons = {
     iconInfo : require('./iconInfo.svg').default,
     iconMic : require('./iconMicCall.svg').default,
     iconAddImg : require('./iconAddImg.svg').default,
-    iconLikeHeart : require('./iconLikeHeart.svg').default
+    iconLikeHeart : require('./iconLikeHeart.svg').default,
+    iconSimilarAccount : require('./iconSimilarAccount.svg').default,
+    iconAddFriendsList : require('./iconAddFriendsList.svg').default,
+    iconAddBestFriend : require('./iconAddBestFriend.svg').default,
+    iconCloseFriend : require('./iconClickAddFriend.svg').default,
+    iconCreatePost : require('./iconCreatePost.svg').default,
+    iconAddPost : require('./iconAddPost.svg').default,
+    iconEmoji : require('./iconEmoji.svg').default
 }

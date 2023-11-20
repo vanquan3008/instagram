@@ -133,6 +133,86 @@ const authController = {
         catch(err){
             res.status(500).json({message:"Not found"});
         }
+    },
+    //Get user name by query 
+    getUserNamebyQuery: async (req,res)=>{
+        const query = req.query;
+        try{
+            const users = await User.find({
+                username: { $regex: `.*${query.username}.*` }
+            });
+            const userNew = users.map((user) => {  
+                const {password ,isAdmin ,  ...others} = user._doc;
+                return others;
+            });
+           
+            if(userNew){
+                res.status(200).json(userNew);
+            }
+            else{
+                res.status(404).json("User not found")
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    },
+
+    //Update follow
+    updateUserFollow : async (req,res) => {
+        // User follows
+        const userid = req.params.id;
+        // User
+        const currentUserId = req.body.userId;
+        if(userid !== currentUserId){
+            try{
+                const user = await User.findOne({_id: userid});
+                const currentUser = await User.findOne({_id:currentUserId});
+                if(!currentUser.followers.includes(user._id)){
+
+                    await user.updateOne({$push : {followers:currentUser._id}})
+                    await currentUser.updateOne({$push : {followings :user._id}})
+
+                    res.status(200).json('User follow sucessfully')
+                }
+                else{
+                    res.status(404).json('User invalid')
+                }
+            }
+            catch(err){
+                res.status(404).json(err)
+            }
+        }
+        else{
+            console.log('Not following owner user')
+        }
+    }
+    ,
+    updateUserUnFollow : async(req, res)=>{
+        // User was followed
+        const userid = req.params.id;
+        // User
+        const currentUserId = req.body.userId;
+        if(userid !== currentUserId){
+            try{
+                const user = await User.findOne({_id: userid});
+                const currentUser = await User.findOne({_id:currentUserId});
+                if(currentUser.followings.includes(user._id)){
+                    await user.updateOne({$pull : {followers:currentUser._id}})
+                    await currentUser.updateOne({$pull : {followings :user._id}})
+                    res.status(200).json('User unfollow sucessfully')
+                }
+                else{
+                    res.status(200).json('Not found')
+                }
+            }
+            catch(err){
+                res.status(404).json(err)
+            }
+        }
+        else{
+            console.log('Not following owner user')
+        }
     }
 
 }

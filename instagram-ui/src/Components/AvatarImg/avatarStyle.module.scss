@@ -30,6 +30,16 @@
     border:2px solid var(--default-white); 
     box-shadow: 1px 1px rgba(var(--default-black),0.01);
 }
+.online{
+    width: 10px;
+    height: 10px;
+    background-color: chartreuse;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 8px;
+    right: 4px;
+    border: 2px solid var(--default-white);
+}
 
 //Size 
 .small{

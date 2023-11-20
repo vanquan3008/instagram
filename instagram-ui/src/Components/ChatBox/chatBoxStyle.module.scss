@@ -49,6 +49,11 @@
         padding: 16px;
         position: relative;
         z-index: 1;
+        .react-input-emoji--input{
+            max-width: 200px;
+            max-height: 30px;
+            overflow-y: scroll;
+        }
         .chat-input__icon,
         .chat-input__send{
             position: absolute;

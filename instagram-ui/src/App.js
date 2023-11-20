@@ -16,6 +16,7 @@ function App() {
                     <Route path="/" element={user ? <Home/> : <Login/>}/>
                     <Route path="/register" element={user ? <Home/> : <Register/> }/>
                     <Route path="/reel" element={ <Reels/> }/>
+                    <Route path="/messages/:userid" element={ <Messages/> }/>
                     <Route path="/messages" element={ <Messages/> }/>
                     <Route path="/profile/:username" element={ <Profile/> }/>
                 </Routes>

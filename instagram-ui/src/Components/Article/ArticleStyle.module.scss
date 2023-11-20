@@ -150,6 +150,8 @@
         .Info_Post,
         .List_Comment{
             margin-top: 8px;
+            z-index: 100;
+            position: relative;
             .Title,
             .ButtonMore,
             .ShowComment{
