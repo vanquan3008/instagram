@@ -28,6 +28,28 @@ io.on("connection", (socket) => {
           io.to(user.socketId).emit("reciever-message", data);
         }
     });
+
+    //Call user
+    socket.on("callUser" , (data)=>{
+        const {userToCall} = data 
+        const idtoCall = users.find((user)=> user.userId = userToCall);
+        console.log("Connection with id: ", idtoCall);
+        console.log("Data: ", data)
+        if(idtoCall){
+            io.to(idtoCall).emit("callUser", 
+                {
+                    signal : data.signalData ,
+                    from : data.from,
+                    name : data.name
+                }
+            )
+        }
+    })
+
+    socket.on("callAnswers", (data)=>{
+        io.to(data.to).emit("callAccepts", data.signal)
+    })
+
     //Disconnect user with socket  
     socket.on("disconnect", () =>{
         console.log("User disconnected : ", socket.id);

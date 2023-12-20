@@ -66,6 +66,62 @@ const postController = {
             console.log(err);
             res.status(500).json(err);
         }
+    },
+    //[PUT]/like/:postid
+    likePost : async(req, res)=>{
+        try{
+            const postid = req.params.postid;
+            const currentPost = await Post.findOne({_id: postid});
+            console.log(req.body.userId)
+            //Dislike
+            if(currentPost.like.includes(req.body.userId)){
+                await currentPost.updateOne({ $pull: { like: req.body.userId }})
+                res.status(200).json("The post has been disliked!")
+            }
+            else{
+                await currentPost.updateOne({ $push: { like: req.body.userId }})
+                res.status(200).json("The post has been liked!")
+                console.log(currentPost)
+            }
+        }
+        catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    //[Delete]/delete/:postid
+    deletePost : async(req,res)=> {
+        const postId = req.params.postid;
+        const post = await Post.findOne({_id:postId});
+        const userPost = req.body.userId;
+        try{
+            if(post.userId === userPost){
+               await post.deleteOne();
+               res.status(200).json( userPost);
+            }
+            else{
+                res.status(404).json(userPost)
+            }
+        }
+        catch (err) {
+            res.status(500).json(userPost);
+        }
+    },
+    updatePost: async(req, res) =>{
+        const postId = req.params.postid;
+        const post = await Post.findOne({_id:postId});
+        const userPost = req.body.userId;
+        try{
+            if(userPost === post.userId){
+                await Post.updateOne( {_id:postId}, req.body)
+                res.status(200).json("Updated sucessfully")
+            }
+            else{
+                res.status(404).json("Can not update post other people");
+            }
+        }
+        catch (err) {
+            res.status(500).json(err);
+        }
     }
     
 }

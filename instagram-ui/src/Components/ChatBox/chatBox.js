@@ -27,7 +27,7 @@ function ChatBox({userChat , userCurrent ,chatID ,setSendMessage ,recieverMessag
             }
             getMessage();
         }catch(e){
-            console.log(e)
+            console.log(e);
         }
     },[chatID])
 
@@ -60,7 +60,7 @@ function ChatBox({userChat , userCurrent ,chatID ,setSendMessage ,recieverMessag
         }
         setSendMessage({...message , recieverId : userChat._id})
     };
-
+    console.log(userChat)
     return (
         <div className={cx("chat-box")}>
             {/* Header chat box */}
@@ -81,12 +81,12 @@ function ChatBox({userChat , userCurrent ,chatID ,setSendMessage ,recieverMessag
                     <div className={cx('header__fc-other--icon')}>
                         <Imgs src={icons.iconCall}></Imgs>
                     </div>
-                    <div className={cx('header__fc-other--icon')}>
+                    <a className={cx('header__fc-other--icon')} href={"/messages/callvideo/" + userChat?._id}>
                         <Imgs src={icons.iconCallVideo}></Imgs>
-                    </div>
-                    <div className={cx('header__fc-other--icon')}>
+                    </a>
+                    <a className={cx('header__fc-other--icon')}>
                         <Imgs src={icons.iconInfo}></Imgs>
-                    </div>
+                    </a>
                 </div>
 
            </header>

@@ -16,5 +16,13 @@ export const  icons = {
     iconCloseFriend : require('./iconClickAddFriend.svg').default,
     iconCreatePost : require('./iconCreatePost.svg').default,
     iconAddPost : require('./iconAddPost.svg').default,
-    iconEmoji : require('./iconEmoji.svg').default
+    iconEmoji : require('./iconEmoji.svg').default,
+    
+
+    iconOnVideo : require('./iconOnVideo.svg').default,
+    iconOffVideo : require('./iconOffVideo.svg').default,
+    iconOnSound : require('./iconOnSound.svg').default,
+    iconOffSound : require('./iconOffSound.svg').default,
+    iconOnMutex : require('./iconOnMute.svg').default,
+    iconOffMic : require('./iconOffMic.svg').default
 }

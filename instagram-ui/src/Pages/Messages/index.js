@@ -54,9 +54,9 @@ function Messages() {
     useEffect(() => {
         socket.current.on("reciever-message", (data) => {
           setRecieverMessage(data);
-        });
+        });  
     }, []);
-
+    
 
 
     //Get conversation

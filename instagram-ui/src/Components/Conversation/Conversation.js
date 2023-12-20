@@ -46,7 +46,7 @@ function Conversation({conversation , currentuser , userOnline}) {
 
     return ( 
         <div className={cx('conversation')}>
-            <div className={cx('conversation__avatar ')}>
+            <div className={cx('conversation__avatar')}>
                 <AvatarImg className={cx('image')}
                     img = {user?.profilePicture === "" ? image.noAvatar : user?.profilePicture}
                     size={'big'}

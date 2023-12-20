@@ -6,7 +6,7 @@ import styles from './imageStyle.module.scss'
 const Imgs = forwardRef(({ src , ref , classname , ...props},alt)=>{
     const [fallback,setFallback] = useState('')
     const handleError = ()=>{
-        setFallback (image.noImage);
+        setFallback(image.noImage);
     }
     return(
         // eslint-disable-next-line

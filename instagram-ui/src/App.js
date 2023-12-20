@@ -6,6 +6,7 @@ import Register from '~/Pages/Register';
 import Login from '~/Pages/Login';
 import Messages from './Pages/Messages';
 import { store } from './Redux/store';
+import { CallVideo } from './Pages/CallVideo';
 
 function App() {
     const user = store.getState().auth.login.currentUser;
@@ -18,7 +19,9 @@ function App() {
                     <Route path="/reel" element={ <Reels/> }/>
                     <Route path="/messages/:userid" element={ <Messages/> }/>
                     <Route path="/messages" element={ <Messages/> }/>
+                    <Route path="/messages/callvideo/:id" element={ <CallVideo/>}/>
                     <Route path="/profile/:username" element={ <Profile/> }/>
+                    
                 </Routes>
             </div>
         </BrowserRouter>

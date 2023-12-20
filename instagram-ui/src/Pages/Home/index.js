@@ -20,6 +20,7 @@ import { loginSucessfully } from "~/Redux/authSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import { format } from "timeago.js"
+import { SettingsPost } from "~/Components/SettingsPost";
 const cx = classNames.bind(styles)
 const value = [
     {
@@ -123,7 +124,10 @@ function Home() {
     const dispatch = useDispatch();
     const [_articles, setarticles] = useState([]);
     const user = useSelector((state) => state.auth.login.currentUser);
-    const [_articlesSuggest ,setarticlesSucess] = useState([])
+    const [_articlesSuggest ,setarticlesSucess] = useState([]);
+    const [onclickSetting , setonclickSetting] = useState(false);
+    const [clickPostSetting , setonclickPostSetting] = useState(null);
+
     const usermain = {
         buttontype : 'switch' ,
         username : user?.username,
@@ -131,12 +135,8 @@ function Home() {
         image:user?.profilePicture,
         namebutton: 'Switch'
     } 
-    
-
     createAxios(user,dispatch,loginSucessfully)
-   
 
-    
     const renderStory  = value.map((value,index)=>{
         return(
            <li key={index} className={cx('StoryItem')}>
@@ -167,10 +167,17 @@ function Home() {
     const renderPost = _articles_line.map(
         (value,index)=>{
             return(
-                <Article key={index} articles={value}></Article>
+                <Article
+
+                    key={index} 
+                    articles={value}
+                    onhandlemore={setonclickSetting}
+                    setpost = {setonclickPostSetting}
+                ></Article>
             );
         }
     )
+    
 
 
     useEffect(()=>{
@@ -195,7 +202,13 @@ function Home() {
     const renderPostSuggest = _articlesSuccess_line.map(
         (value,index)=>{
             return(
-                <Article key={index} articles={value}></Article>
+                <Article
+
+                    key={index} 
+                    articles={value}
+                    onhandlemore={setonclickSetting}
+                    setpost = {setonclickPostSetting}
+                ></Article>
             );
         }
     )
@@ -218,129 +231,137 @@ function Home() {
     )
 
     return(
-   <DefaultLayout>
-        <main>
-            <div className={cx('HomePage')}>
-                <div className={cx('Home-main')}>
-                    {/* Story */}
-                    <div className={cx('Story')}>
-                        <ul className={cx('listStory')}>
-                            <li className={cx('Space_Left')}></li>
-                            {renderStory}
-                            <li className={cx('Space_Right')}></li>
-    
-                        </ul>
-                    </div>
-                    {/* Content */}
-                    <div className={cx('Content')}>
-                        <div className={cx('MarginBottom_24px')}></div>
-                        <div className={cx('MarginBottom_16px')}></div>
-    
-                        {/* Post Friend*/}
-                        <div className={cx('Post_Friend')}>
-                            {renderPost}
-                            {/* Between read articled and not read article  */}
-                            <div className={cx('Betweenarticle')}>
-                                <div className={cx('NotiRead')}>
-                                    <div className={cx('WrapperNoti')}>
-                                        <div className={cx('CheckRead')}>
-                                            <Imgs className={cx('Size_72')} src = {image.checkiconInsta}></Imgs>
-                                        </div>
-                                        <div className={cx('Note1')}>
-                                            <span>You're all caught up</span>
-                                        </div>
-                                        <div className={cx('Note2')}>
-                                            <span>You've seen all new posts from the past 3 days.</span>
-                                        </div>
-                                        <a href="/" className={cx('NotePast')}>
-                                            View older posts
-                                        </a>
-     
-                                    </div>
-                                </div>
-                                <div className={cx('SuggestPost')}>
-                                    <span>Suggested Posts</span>
-                                </div>
-                            </div>
-                            {renderPostSuggest}
-                        </div>
-                    </div>
-                    {/*Footer*/}
-                </div>
-                {/* infomation */}
-                <div className={cx('Infomation')}>
-                    <div className={cx('wrapper')}>
-                        {/* User me */}
-                        <div className={cx('user')}>
-                            <InfoGeneral 
-                                value={usermain} 
-                                imageSize={'big'}
-                                buttontype={usermain.buttontype} 
-                                namebutton={usermain.namebutton}
-                                story={'no'}
-                                hoverelement={'no'}
-                                nopadding={'yes'}
-                            ></InfoGeneral>
-                        </div>
-                        {/*Suggest for you */}
-                        <div className={cx('guest')}>
-                            <div className={cx('guest_main')}>
-                                <div className={cx('header')}>
-                                    <div className={cx('text')}>
-                                        <span>Suggest for you</span>
-                                    </div>
-                                    <a href="/">See All</a>
-                                </div>
-                                <div className={cx('containers')}>
-                                    {renderlistFriendSuggest}
-                                </div>
-                            </div>
-    
-                        </div>
-                        <div className={cx('footer')}>
-                            <ul className={cx('listfooter')}>
-                                <li className={cx('item')}>
-                                    <a href="/">About</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Help</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Press</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">API</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Jobs</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Privacy</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Terms</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Locations</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Languages</a>
-                                </li>
-                                <li className={cx('item')}>
-                                    <a href="/">Meta Verified</a>
-                                </li>
+   <>
+       <DefaultLayout>
+            <main>
+                <div className={cx('HomePage')}>
+                    <div className={cx('Home-main')}>
+                        {/* Story */}
+                        <div className={cx('Story')}>
+                            <ul className={cx('listStory')}>
+                                <li className={cx('Space_Left')}></li>
+                                {renderStory}
+                                <li className={cx('Space_Right')}></li>
+        
                             </ul>
-                            <span>
-                            © 2023 Instagram from Meta
-                            </span>
+                        </div>
+                        {/* Content */}
+                        <div className={cx('Content')}>
+                            <div className={cx('MarginBottom_24px')}></div>
+                            <div className={cx('MarginBottom_16px')}></div>
+        
+                            {/* Post Friend*/}
+                            <div className={cx('Post_Friend')}>
+                                {renderPost}
+                                {/* Between read articled and not read article  */}
+                                <div className={cx('Betweenarticle')}>
+                                    <div className={cx('NotiRead')}>
+                                        <div className={cx('WrapperNoti')}>
+                                            <div className={cx('CheckRead')}>
+                                                <Imgs className={cx('Size_72')} src = {image.checkiconInsta}></Imgs>
+                                            </div>
+                                            <div className={cx('Note1')}>
+                                                <span>You're all caught up</span>
+                                            </div>
+                                            <div className={cx('Note2')}>
+                                                <span>You've seen all new posts from the past 3 days.</span>
+                                            </div>
+                                            <a href="/" className={cx('NotePast')}>
+                                                View older posts
+                                            </a>
+         
+                                        </div>
+                                    </div>
+                                    <div className={cx('SuggestPost')}>
+                                        <span>Suggested Posts</span>
+                                    </div>
+                                </div>
+                                {renderPostSuggest}
+                            </div>
+                        </div>
+                        {/*Footer*/}
+                    </div>
+                    {/* infomation */}
+                    <div className={cx('Infomation')}>
+                        <div className={cx('wrapper')}>
+                            {/* User me */}
+                            <div className={cx('user')}>
+                                <InfoGeneral 
+                                    value={usermain} 
+                                    imageSize={'big'}
+                                    buttontype={usermain.buttontype} 
+                                    namebutton={usermain.namebutton}
+                                    story={'no'}
+                                    hoverelement={'no'}
+                                    nopadding={'yes'}
+                                ></InfoGeneral>
+                            </div>
+                            {/*Suggest for you */}
+                            <div className={cx('guest')}>
+                                <div className={cx('guest_main')}>
+                                    <div className={cx('header')}>
+                                        <div className={cx('text')}>
+                                            <span>Suggest for you</span>
+                                        </div>
+                                        <a href="/">See All</a>
+                                    </div>
+                                    <div className={cx('containers')}>
+                                        {renderlistFriendSuggest}
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div className={cx('footer')}>
+                                <ul className={cx('listfooter')}>
+                                    <li className={cx('item')}>
+                                        <a href="/">About</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Help</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Press</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">API</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Jobs</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Privacy</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Terms</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Locations</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Languages</a>
+                                    </li>
+                                    <li className={cx('item')}>
+                                        <a href="/">Meta Verified</a>
+                                    </li>
+                                </ul>
+                                <span>
+                                © 2023 Instagram from Meta
+                                </span>
+                            </div>
                         </div>
                     </div>
+        
                 </div>
-    
-            </div>
-            <FooterLayOut></FooterLayOut>
-        </main>
-   </DefaultLayout>
+                <FooterLayOut></FooterLayOut>
+            </main>
+       </DefaultLayout>
+
+       <SettingsPost 
+            hidden={onclickSetting} 
+            sethidden ={setonclickSetting} 
+            post = {clickPostSetting}
+        ></SettingsPost>
+   </>
     );
 }
 

@@ -7,7 +7,7 @@ function ImgStory({info}) {
     return ( 
     <a href="/" className= {cx('imgStory')}>
         <div className={cx('image_i')}>
-            <AvatarImg img = {info.imagestory} size={'big'}></AvatarImg>
+            <AvatarImg img = {info.imagestory } size={'big'}></AvatarImg>
         </div>
         <div className={cx('userStory')}>{info.username}</div>
     </a>
