@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from '~/App';
+import App from '../src/App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from '~/Components/GlobalStyle';
 // import store from "./Redux/store.js"

@@ -47,8 +47,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "build": "npx tailwindcss -i ./src/tailwindinput.css -o ./dist/tailwindoutput.css --watch"
+    "eject": "react-app-rewired eject",
+    "build": "react-app-rewired build"
   },
   "eslintConfig": {
     "extends": [
